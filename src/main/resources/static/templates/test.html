@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><div class="app">
+        <div class="main">
+            <div class="container-box">
+                <div class="k-header" style="background-color: rgb(93, 103, 164);">
+                    <header class="header"><span>在线体验-智能导诊</span></header>
+                </div>
+                <div id="context" class="default-top">
+                    <div class="declare_content"><span class="declare_text">声明：在线体验-智能导诊不能代替线下执业医生的诊疗，以下结果只能作为建议。</span>
+                    </div>
+                    <div id="container">
+                        <div  ng-repeat="x in data">
+                            <div class="znxy-question-container">
+                                <div class="znxy-views">
+
+                                    <div class="znxy-questions-photo znxy-ui-aside"><img
+                                            src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                                    </div>
+                                    <div class="znxy-questions-main znxy-ui-fluidunit">
+                                        <div class="znxy-questions-op znxy-ui-aside-right">
+                                            <div class="znxy-questions-opt-container">
+                                                <a href="###" class="znxy-questions-button znxy-questions-modify">修改</a>
+                                                <a href="###" class="znxy-questions-button znxy-questions-cancel" hidden="1">取消</a></div>
+                                        </div>
+                                        <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                            <form class="znxy-questions-form">
+                                                <div class="znxy-questions-options-container"  >
+
+                                                    <label class="znxy-questions-options-label znxy-ui-formitem-radio" ng-repeat="r in x.option">
+                                                        <input type="radio" class="znxy-questions-option"><span>{{r.label}}</span> </label> </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="znxy-answer-container">
+                                <div class="znxy-views">
+                                    <div class="znxy-answers-view">
+                                        <div class="znxy-answers-photo znxy-ui-aside-right"><img
+                                                src="https://app.img.kangfuzi.com/b8b9f79a2f3f60198e67de4dd5b12a9b.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                                        </div>
+                                        <div class="znxy-answers-main znxy-ui-fluidunit">
+                                            <div class="znxy-answers-content">
+                                                <div class="znxy-answers-bubble"><p>女</p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+            </div>
+        </div>
+    </div></title>
+</head>
+<body>
+
+</body>
+</html>
