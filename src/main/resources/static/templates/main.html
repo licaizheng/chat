@@ -30,14 +30,16 @@
                                                         class="znxy-questions-options-label znxy-ui-formitem-radio"
                                                         ng-repeat="r in x.option" ng-init="innerIndex = $index">
                                                     <input type="radio" class="znxy-questions-option" name="select"
-                                                           ng-click="change(outerIndex,innerIndex)">
+                                                           ng-click="change(outerIndex,innerIndex)"
+                                                           ng-disabled="x.isShow">
                                                     <i></i> <span> {{r.label}} </span> </label></div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="znxy-question-container-c7ecad80b33bb5b4e23eda75ae83df051515140594" ng-switch-when="text">
+                            <div id="znxy-question-container-c7ecad80b33bb5b4e23eda75ae83df051515140594"
+                                 ng-switch-when="text">
                                 <div class="znxy-views">
                                     <div class="znxy-questions-view">
                                         <div class="znxy-questions-photo znxy-ui-aside"><img
@@ -45,17 +47,60 @@
                                         </div>
                                         <div class="znxy-questions-main znxy-ui-fluidunit">
                                             <div class="znxy-questions-op znxy-ui-aside-right">
-                                                <div class="znxy-questions-opt-container"><a href="###"
-                                                                                             class="znxy-questions-button znxy-questions-modify"
-                                                                                             hidden="">修改</a> <a
-                                                        href="###" class="znxy-questions-button znxy-questions-cancel"
-                                                        hidden="">取消</a></div>
+                                                <div class="znxy-questions-opt-container">
+                                                    <a class="znxy-questions-button znxy-questions-modify"
+                                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
                                             </div>
-                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>请问有什么不适症状？</h3>
+                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
                                                 <form class="znxy-questions-form">
-                                                    <div class="znxy-questions-options-container"><textarea
-                                                            class="znxy-questions-textarea"
-                                                            placeholder="请输入症状, 例如咳嗽、发烧等"></textarea></div>
+                                                    <div class="znxy-questions-options-container">
+                                                        <textarea class="znxy-questions-textarea"
+                                                                  placeholder="{{x.label}}"
+                                                                  ng-model="x.content"
+                                                                  ng-disabled="x.isShow"></textarea></div>
+                                                    <div class="znxy-questions-buttons-container">
+                                                        <button class="znxy-questions-submit-button"
+                                                                ng-click="conform(outerIndex,innerIndex)"
+                                                                ng-disabled="x.isShow">确认
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="znxy-question-container-6475be1097a504b38f47aa3b366fda9d1515307495"
+                                 ng-switch-when="last">
+                                <div class="znxy-views">
+                                    <div class="znxy-questions-view" disabled="1">
+                                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                                src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                                        </div>
+                                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                                <div class="znxy-questions-opt-container"><a href="###"
+                                                                                             class="znxy-questions-button znxy-questions-modify">修改</a>
+                                                    <a href="###" class="znxy-questions-button znxy-questions-cancel"
+                                                       hidden="1">取消</a></div>
+                                            </div>
+                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>请问是否伴有流涕、鼻塞症状?</h3>
+                                                <form class="znxy-questions-form">
+                                                    <div class="znxy-questions-options-container"><label
+                                                            class="znxy-questions-options-label znxy-ui-formitem-checkbox">
+                                                        <input type="checkbox" value="0" data-text="流涕"
+                                                               class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
+                                                               disabled=""> <i></i> <span> 流涕  </span> </label> <label
+                                                            class="znxy-questions-options-label znxy-ui-formitem-checkbox">
+                                                        <input type="checkbox" value="1" data-text="鼻塞"
+                                                               class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-1"
+                                                               disabled=""> <i></i> <span> 鼻塞  </span> </label> <label
+                                                            class="znxy-questions-options-label znxy-ui-formitem-checkbox">
+                                                        <input type="checkbox" value="2" data-text="都没有"
+                                                               class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-2"
+                                                               disabled=""> <i></i> <span> 都没有  </span> </label></div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button" disabled="">确认
                                                         </button>
@@ -66,16 +111,301 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="znxy-answer-container" ng-show="x.isShow">
-                            <div class="znxy-views">
-                                <div class="znxy-answers-view">
-                                    <div class="znxy-answers-photo znxy-ui-aside-right"><img
-                                            src="https://app.img.kangfuzi.com/b8b9f79a2f3f60198e67de4dd5b12a9b.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                            <div id="znxy-answer-container" ng-show="x.isShow">
+                                <div class="znxy-views">
+                                    <div class="znxy-answers-view">
+                                        <div class="znxy-answers-photo znxy-ui-aside-right"><img
+                                                src="https://app.img.kangfuzi.com/b8b9f79a2f3f60198e67de4dd5b12a9b.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                                        </div>
+                                        <div class="znxy-answers-main znxy-ui-fluidunit">
+                                            <div class="znxy-answers-content">
+                                                <div class="znxy-answers-bubble"><p>{{anwser[outerIndex]}}</p></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="znxy-answers-main znxy-ui-fluidunit">
-                                        <div class="znxy-answers-content">
-                                            <div class="znxy-answers-bubble"><p>{{anwser[outerIndex]}}</p></div>
+                                </div>
+                            </div>
+                            <div id="znxy-result-container-3" ng-switch-when="result" >
+                                <div class="znxy-views znxy-results-view znxy-results-view-overall">
+                                    <div class="znxy-results-view znxy-results-view-overall">
+                                        <div class="znxy-results-heading"><h3>为您推荐科室</h3>
+                                            <p class="znxy-results-statement">您的描述与以下科室的疾病比较接近，建议您优先去以下科室挂号就诊。</p>
+                                            <!--<h3>病情回顾</h3>-->
+                                            <!--<p class="znxy-results-statement">因不明原因出现咳嗽。咳嗽呈阵发性，咳黄色粘痰，呈阵咳，以夜晚为主，影响睡眠，程度中等。伴胸闷、干咳、发热、咳痰。无气促。</p>-->
+                                        </div>
+                                        <div class="znxy-results-content">
+                                            <div class="znxy-results-department"><span
+                                                    class="znxy-results-department-logo"></span> 儿科
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-0" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="0"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="0"></a> </span> <h4
+                                                        class="znxy-results-result-name">支气管炎</h4> <span
+                                                        class="znxy-results-result-rate">22.9%</span>
+                                                    <section class="znxy-results-result-short-desc">出现了咳嗽加重发热建议到医院就诊
+                                                    </section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，<em>发热</em>，<em>咳痰</em>
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            确诊需要痰液检查、X线检查、外周血象等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            1.支气管炎治疗原则以对症治疗为主，保持呼吸道通畅，纠正缺氧与水，电解质紊乱，积极控制病毒感染和继发细菌感染以及并发症。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            2.一般不用抗生素治疗，当婴幼儿出现发热、黄痰、白细胞增多时，须考虑为细菌感染可适当使用抗生素。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">3.一般不用镇咳或镇静剂。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            4.对症治疗包括雾化吸入支气管扩张剂、化痰等治疗。
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/f1f5a2f484bf3d906c887fed6584c632"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-1" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="1"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="1"></a> </span> <h4
+                                                        class="znxy-results-result-name">急性上呼吸道感染</h4> <span
+                                                        class="znxy-results-result-rate">16.9%</span>
+                                                    <section class="znxy-results-result-short-desc">要注意保暖多喝水,避免受凉感冒
+                                                    </section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，流涕，鼻塞，<em>发热</em>
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">待确认流涕、鼻塞等伴随症状
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            确诊需要病毒和病毒抗体的测定、细菌培养、血常规检查等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            1.一般治疗：注意适当休息，保持室内空气清新，多饮开水、保持体液充足，进高热量、高维生素饮食。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            2.病因治疗：病毒感染时目前尚无特效药物，常用金刚烷胺。细菌性感染时，根据病情适当选用抗生素。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            3.此外还需采用一些对症处理措施，如有发热、头痛、全身痛时可用解热止痛药；喷嚏、流涕、鼻塞时可用曲吡那敏（扑尔敏）、感冒通、1%麻黄碱滴鼻等；咳嗽时可用止咳药；咽痛时可用度米芬（杜灭芬）喉片、溶菌酶含片等。
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/0d418a784ab448bdeb36b5ee45199ea7"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-2" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="2"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="2"></a> </span> <h4
+                                                        class="znxy-results-result-name">咽炎</h4> <span
+                                                        class="znxy-results-result-rate">11.4%</span>
+                                                    <section class="znxy-results-result-short-desc">出现咽喉部位异物感及时就诊
+                                                    </section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">典型症状:
+                                                            <em>咳嗽</em>，呕吐，<em>发热</em>，恶心
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">待确认恶心、呕吐等伴随症状
+                                                        </section>
+                                                        <section class="znxy-results-result-item">确诊需要外周血象、病原学检查等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">暂无相关信息</section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/fa40ac659f2a4fede50afe1dd4592f26"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-3" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="3"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="3"></a> </span> <h4
+                                                        class="znxy-results-result-name">肺炎</h4> <span
+                                                        class="znxy-results-result-rate">9.1%</span>
+                                                    <section class="znxy-results-result-short-desc">暂无描述</section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">暂无相关信息</section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            确诊需要胸部影X线检查、血生化、痰液检查等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">暂无相关信息</section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/c5e087febc63dbe05966ef335233ebd7"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-4" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="4"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="4"></a> </span> <h4
+                                                        class="znxy-results-result-name">哮喘</h4> <span
+                                                        class="znxy-results-result-rate">6.7%</span>
+                                                    <section class="znxy-results-result-short-desc">
+                                                        确诊需血常规、痰液检查、肺功能检查等检查
+                                                    </section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，<em>胸闷</em>，喘息，气促
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">待确认气促、喘息等伴随症状
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            确诊需要痰液检查、胸部X线检查、IgE水平等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            1.急性发作期的患者可用缓解药物，如用快速起效的吸入β2受体激动剂（如沙丁胺醇等）。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            2.所有哮喘患者均需依据疾病严重程度制定长期治疗方案，这个治疗方案并不是一成不变的，随着疾病进展，药物种类和剂量以及使用的频度均要相应增加，症状被控制后，则相应减少。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            3.哮喘患者治疗的重点是抑制炎症为主的规范治疗，而不是每次严重发作时“临时抱佛脚”。
+                                                        </section>
+                                                        <section class="znxy-results-result-item"></section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/f904fd472d6c45c6116b17ca427ee828"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-5" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="5"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="5"></a> </span> <h4
+                                                        class="znxy-results-result-name">肺结核</h4> <span
+                                                        class="znxy-results-result-rate">1.9%</span>
+                                                    <section class="znxy-results-result-short-desc">确诊需病原学检查、X线胸片检查等检查
+                                                    </section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，盗汗，咯血
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">待确认盗汗、咯血等伴随症状
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            确诊需要免疫学检查、血清中结核菌抗体测定、胸部CT等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            1.肺结核的治疗原则：早期、规律、全程、适量、联合五项原则。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            2.肺结核的治疗包括抗结核化疗、对症治疗、免疫调节治疗及手术治疗等，其中化疗是治愈病人和防止传播的根本措施。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            3.久治不愈的空洞型伴排菌、干酪样病变或结核球病变＞2cm的肺结核患者需行手术治疗。
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/8e92c1ac664620987e6ecbdd216eb2ff"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-1-6" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="1"
+                                                                                                   data-i="6"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="1" data-i="6"></a> </span> <h4
+                                                        class="znxy-results-result-name">气管炎</h4> <span
+                                                        class="znxy-results-result-rate">1.4%</span>
+                                                    <section class="znxy-results-result-short-desc">暂无描述</section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">暂无相关信息</section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">暂无相关信息</section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">暂无相关信息</section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/69f55e1c0bf1b4c04692693af52ae768"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
