@@ -39,23 +39,29 @@ QY.CONTROLLERS
                     "content":"",
                     "isShow":false
 
-                }, {
-                    "select": "text",
+                },{
+                    "select": "result",
                     "desc": "请问有什么不适症状？",
-                    "label":"请输入症状，例如发sssssssss",
+                    "label":"请输入症状，例如发烧、咳嗽等",
                     "content":"",
                     "isShow":false
 
-                }];
+                }
+            ];
 
             $scope.anwser=[];
             $scope.text={"content":""};
-
+            /**
+             * radio的点击事件
+             */
             $scope.change=function (outerIndex,innerIndex) {
                 $scope.data[outerIndex].isShow=true;
                 $scope.anwser[outerIndex]=$scope.data[outerIndex].option[innerIndex].label;
 
             };
+            /**
+             * textarea的点击确认事件
+             */
             $scope.conform=function (outerIndex,innerIndex) {
                 $scope.data[outerIndex].isShow=true;
                 $scope.anwser[outerIndex]=$scope.data[outerIndex].content;
@@ -66,8 +72,13 @@ QY.CONTROLLERS
                             "desc": "请选择性别",
                             "option": [{"label": "男", "value": "0"}, {"label": "女", "value": "1"}],
                             "isShow":false
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if(outerIndex<$scope.data.length)
+                           $scope.data.splice(outerIndex+1,$scope.data.length-outerIndex+1);
 
-                        }
                         $scope.data.push(s);
 
                     }
@@ -79,9 +90,15 @@ QY.CONTROLLERS
 
                 });
             };
+            /**
+             * 修改按钮对应的事件
+             */
             $scope.modify=function (outerIndex) {
                 $scope.data[outerIndex].isShow=false;
             };
+            /**
+             * 取消按钮对应的事件
+             */
             $scope.cancel=function (outerIndex) {
                 $scope.data[outerIndex].isShow=true;
             };
@@ -93,16 +110,6 @@ QY.CONTROLLERS
 
                 }];
             };
-
-            // /**
-            //  * 初始化完成检查
-            //  */
-            // function initCompleteCheck(){
-            //     isReady=true;
-            //     for(var key in readyCallbacks){
-            //         readyCallbacks[key]();
-            //     }
-            // }
 
 
         }

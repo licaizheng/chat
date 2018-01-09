@@ -81,10 +81,9 @@
                                         </div>
                                         <div class="znxy-questions-main znxy-ui-fluidunit">
                                             <div class="znxy-questions-op znxy-ui-aside-right">
-                                                <div class="znxy-questions-opt-container"><a href="###"
-                                                                                             class="znxy-questions-button znxy-questions-modify">修改</a>
-                                                    <a href="###" class="znxy-questions-button znxy-questions-cancel"
-                                                       hidden="1">取消</a></div>
+                                                <div class="znxy-questions-opt-container">
+                                                    <a href="###" class="znxy-questions-button znxy-questions-modify" ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                                    <a href="###" class="znxy-questions-button znxy-questions-cancel" ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
                                             </div>
                                             <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>请问是否伴有流涕、鼻塞症状?</h3>
                                                 <form class="znxy-questions-form">
