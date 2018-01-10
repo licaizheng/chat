@@ -75,33 +75,38 @@
                             <div id="znxy-question-container-6475be1097a504b38f47aa3b366fda9d1515307495"
                                  ng-switch-when="last">
                                 <div class="znxy-views">
-                                    <div class="znxy-questions-view" disabled="1">
+                                    <div class="znxy-questions-view">
                                         <div class="znxy-questions-photo znxy-ui-aside"><img
                                                 src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
                                         </div>
                                         <div class="znxy-questions-main znxy-ui-fluidunit">
                                             <div class="znxy-questions-op znxy-ui-aside-right">
                                                 <div class="znxy-questions-opt-container">
-                                                    <a href="###" class="znxy-questions-button znxy-questions-modify" ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
-                                                    <a href="###" class="znxy-questions-button znxy-questions-cancel" ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
+                                                    <a class="znxy-questions-button znxy-questions-modify"
+                                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
                                             </div>
-                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>请问是否伴有流涕、鼻塞症状?</h3>
+                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
                                                 <form class="znxy-questions-form">
-                                                    <div class="znxy-questions-options-container"><label
-                                                            class="znxy-questions-options-label znxy-ui-formitem-checkbox">
-                                                        <input type="checkbox" value="0" data-text="流涕"
-                                                               class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
-                                                               disabled=""> <i></i> <span> 流涕  </span> </label> <label
-                                                            class="znxy-questions-options-label znxy-ui-formitem-checkbox">
-                                                        <input type="checkbox" value="1" data-text="鼻塞"
-                                                               class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-1"
-                                                               disabled=""> <i></i> <span> 鼻塞  </span> </label> <label
-                                                            class="znxy-questions-options-label znxy-ui-formitem-checkbox">
-                                                        <input type="checkbox" value="2" data-text="都没有"
-                                                               class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-2"
-                                                               disabled=""> <i></i> <span> 都没有  </span> </label></div>
+                                                    <div class="znxy-questions-options-container">
+                                                        <label class="znxy-questions-options-label znxy-ui-formitem-checkbox"
+                                                               ng-repeat="r in x.option" ng-init="innerIndex = $index">
+                                                            <input type="checkbox" ng-checked="selectAll"
+                                                                   ng-model="r.state"
+                                                                   class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
+                                                            > <i></i> <span> {{r.label}}</span>
+                                                        </label>
+                                                        <label class="znxy-questions-options-label znxy-ui-formitem-checkbox">
+                                                            <input type="checkbox" ng-model="selectAll"
+                                                                   ng-click="all(selectAll,outerIndex,innerIndex)"
+                                                                   class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
+                                                            > <i></i> <span> 全选</span>
+                                                        </label>
+                                                    </div>
                                                     <div class="znxy-questions-buttons-container">
-                                                        <button class="znxy-questions-submit-button" disabled="">确认
+                                                        <button class="znxy-questions-submit-button"
+                                                                ng-click="cc(outerIndex,innerIndex)">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -124,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="znxy-result-container-3" ng-switch-when="result" >
+                            <div id="znxy-result-container-3" ng-switch-when="result">
                                 <div class="znxy-views znxy-results-view znxy-results-view-overall">
                                     <div class="znxy-results-view znxy-results-view-overall">
                                         <div class="znxy-results-heading"><h3>为您推荐科室</h3>
@@ -412,8 +417,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 </div>
+

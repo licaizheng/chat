@@ -49,6 +49,32 @@ QY.CONTROLLERS
                 }
             ];
 
+            // $scope.selectAll=false;
+            // $scope.all= function (m) {
+            //     for(var i=0;i<$scope.persons.length;i++){
+            //         if(m===true){
+            //             $scope.persons[i].state=true;
+            //         }else {
+            //             $scope.persons[i].state=false;
+            //         }
+            //     }
+            // };
+            // $scope.persons=[
+            //     {name:"a",state:false},
+            //     {name:"b",state:false},
+            //     {name:"c",state:false},
+            //     {name:"d",state:false}
+            // ]
+            $scope.selectAll=false;
+            $scope.all= function (m,outerIndex,innerIndex) {
+                for(var i=0;i<$scope.data[outerIndex].option.length;i++){
+                    if(m===true){
+                        $scope.data[outerIndex].option[i].state=true;
+                    }else {
+                        $scope.data[outerIndex].option[i].state=false;
+                    }
+                }
+            };
             $scope.anwser=[];
             $scope.text={"content":""};
             /**
@@ -57,6 +83,15 @@ QY.CONTROLLERS
             $scope.change=function (outerIndex,innerIndex) {
                 $scope.data[outerIndex].isShow=true;
                 $scope.anwser[outerIndex]=$scope.data[outerIndex].option[innerIndex].label;
+
+            };
+            $scope.cc=function (outerIndex,innerIndex) {
+                var data=[];
+                for(var i =0;i<$scope.data[outerIndex].option.length;i++){
+                        if ($scope.data[outerIndex].option[i].state==true)
+                            data.push($scope.data[outerIndex].option[i].label);
+                }
+                console.log(data);
 
             };
             /**
@@ -70,7 +105,7 @@ QY.CONTROLLERS
                         var s ={
                             "select": "last",
                             "desc": "请选择性别",
-                            "option": [{"label": "男", "value": "0"}, {"label": "女", "value": "1"}],
+                            "option": [{"label": "男", "value": "0","state":"false"}, {"label": "女", "value": "1","state":"false"}],
                             "isShow":false
                         };
                         /**
