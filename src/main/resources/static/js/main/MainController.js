@@ -48,25 +48,8 @@ QY.CONTROLLERS
 
                 }
             ];
-
-            // $scope.selectAll=false;
-            // $scope.all= function (m) {
-            //     for(var i=0;i<$scope.persons.length;i++){
-            //         if(m===true){
-            //             $scope.persons[i].state=true;
-            //         }else {
-            //             $scope.persons[i].state=false;
-            //         }
-            //     }
-            // };
-            // $scope.persons=[
-            //     {name:"a",state:false},
-            //     {name:"b",state:false},
-            //     {name:"c",state:false},
-            //     {name:"d",state:false}
-            // ]
             $scope.selectAll=false;
-            $scope.all= function (m,outerIndex,innerIndex) {
+            $scope.all= function (m,outerIndex) {
                 for(var i=0;i<$scope.data[outerIndex].option.length;i++){
                     if(m===true){
                         $scope.data[outerIndex].option[i].state=true;
@@ -83,6 +66,32 @@ QY.CONTROLLERS
             $scope.change=function (outerIndex,innerIndex) {
                 $scope.data[outerIndex].isShow=true;
                 $scope.anwser[outerIndex]=$scope.data[outerIndex].option[innerIndex].label;
+                $http.get('/User/index').success(function (data) {
+                    if (data) {
+                        var s ={
+                            "select": "text",
+                            "desc": "请问有什么不适症状？",
+                            "label":"请输入症状，例如发烧、咳嗽等",
+                            "content":"",
+                            "isShow":false
+
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if(outerIndex<$scope.data.length)
+                            $scope.data.splice(outerIndex+1,$scope.data.length-outerIndex+1);
+
+                        $scope.data.push(s);
+
+                    }
+                    else {
+
+                    }
+
+                }).error(function () {
+
+                });
 
             };
             $scope.cc=function (outerIndex,innerIndex) {
