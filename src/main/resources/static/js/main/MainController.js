@@ -49,13 +49,49 @@ QY.CONTROLLERS
                 }
             ];
             $scope.selectAll=false;
-            $scope.all= function (m,outerIndex) {
+            $scope.all= function (outerIndex,innerIndex) {
+                var l = $scope.data[outerIndex].option.length-1;
+                if (innerIndex!=l){
+                   $scope.data[outerIndex].option[l].state=false;
+                    // console.log($scope.data[outerIndex].option);
+                }else{
+                    $scope.data[outerIndex].option[l].state=true;
+                    // console.log($scope.data[outerIndex].option);
+                    // console.log($scope.data[outerIndex]);
+                $scope.data[outerIndex].isShow=true;
+                var d=[];
                 for(var i=0;i<$scope.data[outerIndex].option.length;i++){
-                    if(m===true){
-                        $scope.data[outerIndex].option[i].state=true;
-                    }else {
-                        $scope.data[outerIndex].option[i].state=false;
+                    // $scope.data[outerIndex].option[i].state=false;
+                    d.push($scope.data[outerIndex].option[i].label);
+
                     }
+
+                $http.get('/User/index').success(function (data) {
+                    if (data) {
+                        var s ={
+                            "select": "text",
+                            "desc": "请问有什么不适症状？",
+                            "label":"请输入症状，例如发烧、咳嗽等",
+                            "content":"",
+                            "isShow":false
+
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if(outerIndex<$scope.data.length)
+                            $scope.data.splice(outerIndex+1,$scope.data.length-outerIndex+1);
+
+                        $scope.data.push(s);
+
+                    }
+                    else {
+
+                    }
+
+                }).error(function () {
+
+                });
                 }
             };
             $scope.anwser=[];
@@ -90,17 +126,43 @@ QY.CONTROLLERS
                     }
 
                 }).error(function () {
-
                 });
-
             };
+
             $scope.cc=function (outerIndex,innerIndex) {
+                $scope.data[outerIndex].isShow=true;
                 var data=[];
                 for(var i =0;i<$scope.data[outerIndex].option.length;i++){
                         if ($scope.data[outerIndex].option[i].state==true)
                             data.push($scope.data[outerIndex].option[i].label);
                 }
                 console.log(data);
+                $http.get('/User/index').success(function (data) {
+                    if (data) {
+                        var s ={
+                            "select": "text",
+                            "desc": "请问有什么不适症状？",
+                            "label":"请输入症状，例如发烧、咳嗽等",
+                            "content":"",
+                            "isShow":false
+
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if(outerIndex<$scope.data.length)
+                            $scope.data.splice(outerIndex+1,$scope.data.length-outerIndex+1);
+
+                        $scope.data.push(s);
+
+                    }
+                    else {
+
+                    }
+
+                }).error(function () {
+
+                });
 
             };
             /**
@@ -114,7 +176,7 @@ QY.CONTROLLERS
                         var s ={
                             "select": "last",
                             "desc": "请选择性别",
-                            "option": [{"label": "男", "value": "0","state":"false"}, {"label": "女", "value": "1","state":"false"}],
+                            "option": [{"label": "男", "value": "0","state":"false"}, {"label": "女", "value": "1","state":"false"}, {"label": "都没有", "value": "2","state":"false"}],
                             "isShow":false
                         };
                         /**
@@ -122,14 +184,10 @@ QY.CONTROLLERS
                          */
                         if(outerIndex<$scope.data.length)
                            $scope.data.splice(outerIndex+1,$scope.data.length-outerIndex+1);
-
                         $scope.data.push(s);
-
                     }
                     else {
-
                     }
-
                 }).error(function () {
 
                 });

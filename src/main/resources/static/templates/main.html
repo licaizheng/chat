@@ -63,7 +63,7 @@
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
                                                                 ng-click="conform(outerIndex,innerIndex)"
-                                                                ng-disabled="x.isShow">确认
+                                                                ng-disabled="!x.content">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -95,18 +95,23 @@
                                                             <input type="checkbox" ng-checked="selectAll"
                                                                    ng-model="r.state"
                                                                    class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
+                                                                   ng-click="all(outerIndex,innerIndex)"
+                                                                   ng-disabled="x.isShow"
+                                                                   ng-click="selectone(outerIndex)"
                                                             > <i></i> <span> {{r.label}}</span>
                                                         </label>
-                                                        <label class="znxy-questions-options-label znxy-ui-formitem-checkbox">
-                                                            <input type="checkbox" ng-model="selectAll"
-                                                                   ng-click="all(selectAll,outerIndex)"
-                                                                   class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
-                                                            > <i></i> <span> 全选</span>
-                                                        </label>
+                                                        <!--<label class="znxy-questions-options-label znxy-ui-formitem-checkbox"  >-->
+                                                        <!--<input type="checkbox"  ng-model="name"-->
+                                                        <!--ng-click="all(outerIndex)"-->
+                                                        <!--class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"-->
+                                                        <!--ng-disabled="x.isShow"-->
+                                                        <!--&gt; <i></i> <span> 都没有</span>-->
+                                                        <!--</label>-->
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
-                                                                ng-click="cc(outerIndex,innerIndex)">确认
+                                                                ng-click="cc(outerIndex,innerIndex)"
+                                                                ng-disabled="x.isShow">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -135,13 +140,13 @@
                                         <div class="znxy-results-heading"><h3>为您推荐科室</h3>
                                             <p class="znxy-results-statement">您的描述与以下科室的疾病比较接近，建议您优先去以下科室挂号就诊。</p>
                                             <!--<h3>病情回顾</h3>-->
-                                            <!--<p class="znxy-results-statement">因不明原因出现咳嗽。咳嗽呈阵发性，咳黄色粘痰，呈阵咳，以夜晚为主，影响睡眠，程度中等。伴胸闷、干咳、发热、咳痰。无气促。</p>-->
+                                            <!--<p class="znxy-results-statement">因受凉出现咳嗽。咳嗽呈阵发性，咳黄白色粘痰，呈单声咳，以夜晚为主，影响睡眠，程度中等。伴气促、胸闷、多饮、多尿、流涕。无鼻塞。</p>-->
                                         </div>
                                         <div class="znxy-results-content">
                                             <div class="znxy-results-department"><span
-                                                    class="znxy-results-department-logo"></span> 儿科
+                                                    class="znxy-results-department-logo"></span> 内分泌科
                                             </div>
-                                            <div class="znxy-results-result znxy-results-result-1-0" data-expand="0">
+                                            <div class="znxy-results-result znxy-results-result-1-0" data-expand="1">
                                                 <div class="znxy-results-result-header"><span
                                                         class="znxy-results-result-department"> <a href="#"
                                                                                                    class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
@@ -150,37 +155,36 @@
                                                         href="#"
                                                         class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
                                                         data-group="1" data-i="0"></a> </span> <h4
-                                                        class="znxy-results-result-name">支气管炎</h4> <span
-                                                        class="znxy-results-result-rate">22.9%</span>
-                                                    <section class="znxy-results-result-short-desc">出现了咳嗽加重发热建议到医院就诊
+                                                        class="znxy-results-result-name">糖尿病</h4> <span
+                                                        class="znxy-results-result-rate">24.2%</span>
+                                                    <section class="znxy-results-result-short-desc">注意低糖饮食,禁烟酒,注意定期复查
                                                     </section>
                                                 </div>
                                                 <div class="znxy-results-result-main">
                                                     <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，<em>发热</em>，<em>咳痰</em>
+                                                        <section class="znxy-results-result-item">典型症状: <em>多饮</em>，多食，消瘦，<em>多尿</em>
                                                         </section>
                                                     </div>
                                                     <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">待确认多食、消瘦等伴随症状
+                                                        </section>
                                                         <section class="znxy-results-result-item">
-                                                            确诊需要痰液检查、X线检查、外周血象等检查
+                                                            确诊需要尿糖、尿液尿酸测定、冠脉血流分数测定等检查
                                                         </section>
                                                     </div>
                                                     <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
                                                         <section class="znxy-results-result-item">
-                                                            1.支气管炎治疗原则以对症治疗为主，保持呼吸道通畅，纠正缺氧与水，电解质紊乱，积极控制病毒感染和继发细菌感染以及并发症。
+                                                            1.学习糖尿病的基本知识，树立战胜疾病的信心。
                                                         </section>
-                                                        <section class="znxy-results-result-item">
-                                                            2.一般不用抗生素治疗，当婴幼儿出现发热、黄痰、白细胞增多时，须考虑为细菌感染可适当使用抗生素。
+                                                        <section class="znxy-results-result-item">2.自我监测血糖。</section>
+                                                        <section class="znxy-results-result-item">3.药物治疗，包括口服药物及胰岛素。
                                                         </section>
-                                                        <section class="znxy-results-result-item">3.一般不用镇咳或镇静剂。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            4.对症治疗包括雾化吸入支气管扩张剂、化痰等治疗。
-                                                        </section>
+                                                        <section class="znxy-results-result-item">4.运动治疗。</section>
+                                                        <section class="znxy-results-result-item">5.饮食治疗。</section>
                                                     </div>
                                                     <div class="znxy-results-result-footer"><a
                                                             class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/f1f5a2f484bf3d906c887fed6584c632"
+                                                            href="https://entity.kangfuzi.com/#/disease/cf10bffa79e595ebb489325424aa1ce8"
                                                             target="_blank">查看疾病详情</a></div>
                                                 </div>
                                             </div>
@@ -193,18 +197,62 @@
                                                         href="#"
                                                         class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
                                                         data-group="1" data-i="1"></a> </span> <h4
+                                                        class="znxy-results-result-name">痛风</h4> <span
+                                                        class="znxy-results-result-rate">1.3%</span>
+                                                    <section class="znxy-results-result-short-desc">多喝水，避免食用高嘌呤的食物
+                                                    </section>
+                                                </div>
+                                                <div class="znxy-results-result-main">
+                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                                        <section class="znxy-results-result-item">典型症状: 高尿酸，关节痛，血尿
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                                        <section class="znxy-results-result-item">待确认关节痛、血尿、高尿酸等伴随症状
+                                                        </section>
+                                                        <section class="znxy-results-result-item">
+                                                            确诊需要尿液尿酸测定、影像学检查、双肾B超等检查
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                                        <section class="znxy-results-result-item">
+                                                            1.急性期的治疗：痛风性关节炎急性期不主张使用降尿酸药物，治疗原则是尽早使用抗炎止痛药，缓解症状。
+                                                        </section>
+                                                        <section class="znxy-results-result-item">2.间歇期及慢性期的治疗：降尿酸药物。
+                                                        </section>
+                                                    </div>
+                                                    <div class="znxy-results-result-footer"><a
+                                                            class="znxy-results-result-link"
+                                                            href="https://entity.kangfuzi.com/#/disease/3ebfdf16642c4c4b2c5d0d03d55460c8"
+                                                            target="_blank">查看疾病详情</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="znxy-results-content">
+                                            <div class="znxy-results-department"><span
+                                                    class="znxy-results-department-logo"></span> 呼吸内科
+                                            </div>
+                                            <div class="znxy-results-result znxy-results-result-2-0" data-expand="0">
+                                                <div class="znxy-results-result-header"><span
+                                                        class="znxy-results-result-department"> <a href="#"
+                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                                                                   data-group="2"
+                                                                                                   data-i="0"></a> <a
+                                                        href="#"
+                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                        data-group="2" data-i="0"></a> </span> <h4
                                                         class="znxy-results-result-name">急性上呼吸道感染</h4> <span
-                                                        class="znxy-results-result-rate">16.9%</span>
+                                                        class="znxy-results-result-rate">15.4%</span>
                                                     <section class="znxy-results-result-short-desc">要注意保暖多喝水,避免受凉感冒
                                                     </section>
                                                 </div>
                                                 <div class="znxy-results-result-main">
                                                     <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，流涕，鼻塞，<em>发热</em>
+                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，<em>流涕</em>，鼻塞，发热
                                                         </section>
                                                     </div>
                                                     <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认流涕、鼻塞等伴随症状
+                                                        <section class="znxy-results-result-item">待确认发热、鼻塞等伴随症状
                                                         </section>
                                                         <section class="znxy-results-result-item">
                                                             确诊需要病毒和病毒抗体的测定、细菌培养、血常规检查等检查
@@ -224,189 +272,6 @@
                                                     <div class="znxy-results-result-footer"><a
                                                             class="znxy-results-result-link"
                                                             href="https://entity.kangfuzi.com/#/disease/0d418a784ab448bdeb36b5ee45199ea7"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="znxy-results-result znxy-results-result-1-2" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="2"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="2"></a> </span> <h4
-                                                        class="znxy-results-result-name">咽炎</h4> <span
-                                                        class="znxy-results-result-rate">11.4%</span>
-                                                    <section class="znxy-results-result-short-desc">出现咽喉部位异物感及时就诊
-                                                    </section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状:
-                                                            <em>咳嗽</em>，呕吐，<em>发热</em>，恶心
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认恶心、呕吐等伴随症状
-                                                        </section>
-                                                        <section class="znxy-results-result-item">确诊需要外周血象、病原学检查等检查
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">暂无相关信息</section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/fa40ac659f2a4fede50afe1dd4592f26"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="znxy-results-result znxy-results-result-1-3" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="3"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="3"></a> </span> <h4
-                                                        class="znxy-results-result-name">肺炎</h4> <span
-                                                        class="znxy-results-result-rate">9.1%</span>
-                                                    <section class="znxy-results-result-short-desc">暂无描述</section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">暂无相关信息</section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">
-                                                            确诊需要胸部影X线检查、血生化、痰液检查等检查
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">暂无相关信息</section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/c5e087febc63dbe05966ef335233ebd7"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="znxy-results-result znxy-results-result-1-4" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="4"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="4"></a> </span> <h4
-                                                        class="znxy-results-result-name">哮喘</h4> <span
-                                                        class="znxy-results-result-rate">6.7%</span>
-                                                    <section class="znxy-results-result-short-desc">
-                                                        确诊需血常规、痰液检查、肺功能检查等检查
-                                                    </section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，<em>胸闷</em>，喘息，气促
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认气促、喘息等伴随症状
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            确诊需要痰液检查、胸部X线检查、IgE水平等检查
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">
-                                                            1.急性发作期的患者可用缓解药物，如用快速起效的吸入β2受体激动剂（如沙丁胺醇等）。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            2.所有哮喘患者均需依据疾病严重程度制定长期治疗方案，这个治疗方案并不是一成不变的，随着疾病进展，药物种类和剂量以及使用的频度均要相应增加，症状被控制后，则相应减少。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            3.哮喘患者治疗的重点是抑制炎症为主的规范治疗，而不是每次严重发作时“临时抱佛脚”。
-                                                        </section>
-                                                        <section class="znxy-results-result-item"></section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/f904fd472d6c45c6116b17ca427ee828"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="znxy-results-result znxy-results-result-1-5" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="5"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="5"></a> </span> <h4
-                                                        class="znxy-results-result-name">肺结核</h4> <span
-                                                        class="znxy-results-result-rate">1.9%</span>
-                                                    <section class="znxy-results-result-short-desc">确诊需病原学检查、X线胸片检查等检查
-                                                    </section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，盗汗，咯血
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认盗汗、咯血等伴随症状
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            确诊需要免疫学检查、血清中结核菌抗体测定、胸部CT等检查
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">
-                                                            1.肺结核的治疗原则：早期、规律、全程、适量、联合五项原则。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            2.肺结核的治疗包括抗结核化疗、对症治疗、免疫调节治疗及手术治疗等，其中化疗是治愈病人和防止传播的根本措施。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            3.久治不愈的空洞型伴排菌、干酪样病变或结核球病变＞2cm的肺结核患者需行手术治疗。
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/8e92c1ac664620987e6ecbdd216eb2ff"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="znxy-results-result znxy-results-result-1-6" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="6"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="6"></a> </span> <h4
-                                                        class="znxy-results-result-name">气管炎</h4> <span
-                                                        class="znxy-results-result-rate">1.4%</span>
-                                                    <section class="znxy-results-result-short-desc">暂无描述</section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">暂无相关信息</section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">暂无相关信息</section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">暂无相关信息</section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/69f55e1c0bf1b4c04692693af52ae768"
                                                             target="_blank">查看疾病详情</a></div>
                                                 </div>
                                             </div>
