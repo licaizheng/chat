@@ -100,13 +100,6 @@
                                                                    ng-click="selectone(outerIndex)"
                                                             > <i></i> <span> {{r.label}}</span>
                                                         </label>
-                                                        <!--<label class="znxy-questions-options-label znxy-ui-formitem-checkbox"  >-->
-                                                        <!--<input type="checkbox"  ng-model="name"-->
-                                                        <!--ng-click="all(outerIndex)"-->
-                                                        <!--class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"-->
-                                                        <!--ng-disabled="x.isShow"-->
-                                                        <!--&gt; <i></i> <span> 都没有</span>-->
-                                                        <!--</label>-->
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
@@ -139,48 +132,39 @@
                                     <div class="znxy-results-view znxy-results-view-overall">
                                         <div class="znxy-results-heading"><h3>为您推荐科室</h3>
                                             <p class="znxy-results-statement">您的描述与以下科室的疾病比较接近，建议您优先去以下科室挂号就诊。</p>
-                                            <!--<h3>病情回顾</h3>-->
-                                            <!--<p class="znxy-results-statement">因受凉出现咳嗽。咳嗽呈阵发性，咳黄白色粘痰，呈单声咳，以夜晚为主，影响睡眠，程度中等。伴气促、胸闷、多饮、多尿、流涕。无鼻塞。</p>-->
                                         </div>
-                                        <div class="znxy-results-content">
+                                        <div class="znxy-results-content" ng-repeat="x in json"
+                                             ng-init="outerIndex = $index">
                                             <div class="znxy-results-department"><span
-                                                    class="znxy-results-department-logo"></span> 内分泌科
+                                                    class="znxy-results-department-logo"></span> {{x.name}}
                                             </div>
-                                            <div class="znxy-results-result znxy-results-result-1-0" data-expand="1">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="0"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="0"></a> </span> <h4
-                                                        class="znxy-results-result-name">糖尿病</h4> <span
-                                                        class="znxy-results-result-rate">24.2%</span>
-                                                    <section class="znxy-results-result-short-desc">注意低糖饮食,禁烟酒,注意定期复查
+                                            <div class="znxy-results-result znxy-results-result-1-0" data-expand="1"
+                                                 ng-repeat="r in x.value" ng-init="innerIndex = $index">
+                                                <div class="znxy-results-result-header" ng-click="show(outerIndex,innerIndex)">
+                                                    <span class="znxy-results-result-department">
+                                                       <a href="#" class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right" data-group="1" data-i="0" ng-hide="r.isShow"></a>
+                                                       <a href="#" class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down" data-group="1" data-i="1"ng-show="r.isShow"></a>
+                                                    </span>
+                                                    <h4 class="znxy-results-result-name">{{r.name}}</h4> <span
+                                                            class="znxy-results-result-rate">{{r.weight}}</span>
+                                                    <section class="znxy-results-result-short-desc">{{r.short_desc}}
                                                     </section>
                                                 </div>
-                                                <div class="znxy-results-result-main">
+                                                <div class="znxy-results-result-main" ng-show="r.isShow">
                                                     <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: <em>多饮</em>，多食，消瘦，<em>多尿</em>
+                                                        <section class="znxy-results-result-item">典型症状: <em>{{r.symptoms}}</em>
                                                         </section>
                                                     </div>
                                                     <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认多食、消瘦等伴随症状
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            确诊需要尿糖、尿液尿酸测定、冠脉血流分数测定等检查
+                                                        <section class="znxy-results-result-item"
+                                                                 ng-repeat="data in r.unconfirmed">{{data}}
                                                         </section>
                                                     </div>
                                                     <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">
-                                                            1.学习糖尿病的基本知识，树立战胜疾病的信心。
+                                                        <section class="znxy-results-result-item"
+                                                                 ng-repeat="advice in r.advice">
+                                                            {{advice}}
                                                         </section>
-                                                        <section class="znxy-results-result-item">2.自我监测血糖。</section>
-                                                        <section class="znxy-results-result-item">3.药物治疗，包括口服药物及胰岛素。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">4.运动治疗。</section>
-                                                        <section class="znxy-results-result-item">5.饮食治疗。</section>
                                                     </div>
                                                     <div class="znxy-results-result-footer"><a
                                                             class="znxy-results-result-link"
@@ -188,94 +172,9 @@
                                                             target="_blank">查看疾病详情</a></div>
                                                 </div>
                                             </div>
-                                            <div class="znxy-results-result znxy-results-result-1-1" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="1"
-                                                                                                   data-i="1"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="1" data-i="1"></a> </span> <h4
-                                                        class="znxy-results-result-name">痛风</h4> <span
-                                                        class="znxy-results-result-rate">1.3%</span>
-                                                    <section class="znxy-results-result-short-desc">多喝水，避免食用高嘌呤的食物
-                                                    </section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: 高尿酸，关节痛，血尿
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认关节痛、血尿、高尿酸等伴随症状
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            确诊需要尿液尿酸测定、影像学检查、双肾B超等检查
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">
-                                                            1.急性期的治疗：痛风性关节炎急性期不主张使用降尿酸药物，治疗原则是尽早使用抗炎止痛药，缓解症状。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">2.间歇期及慢性期的治疗：降尿酸药物。
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/3ebfdf16642c4c4b2c5d0d03d55460c8"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
+
                                         </div>
-                                        <div class="znxy-results-content">
-                                            <div class="znxy-results-department"><span
-                                                    class="znxy-results-department-logo"></span> 呼吸内科
-                                            </div>
-                                            <div class="znxy-results-result znxy-results-result-2-0" data-expand="0">
-                                                <div class="znxy-results-result-header"><span
-                                                        class="znxy-results-result-department"> <a href="#"
-                                                                                                   class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
-                                                                                                   data-group="2"
-                                                                                                   data-i="0"></a> <a
-                                                        href="#"
-                                                        class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
-                                                        data-group="2" data-i="0"></a> </span> <h4
-                                                        class="znxy-results-result-name">急性上呼吸道感染</h4> <span
-                                                        class="znxy-results-result-rate">15.4%</span>
-                                                    <section class="znxy-results-result-short-desc">要注意保暖多喝水,避免受凉感冒
-                                                    </section>
-                                                </div>
-                                                <div class="znxy-results-result-main">
-                                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
-                                                        <section class="znxy-results-result-item">典型症状: <em>咳嗽</em>，<em>流涕</em>，鼻塞，发热
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
-                                                        <section class="znxy-results-result-item">待确认发热、鼻塞等伴随症状
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            确诊需要病毒和病毒抗体的测定、细菌培养、血常规检查等检查
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
-                                                        <section class="znxy-results-result-item">
-                                                            1.一般治疗：注意适当休息，保持室内空气清新，多饮开水、保持体液充足，进高热量、高维生素饮食。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            2.病因治疗：病毒感染时目前尚无特效药物，常用金刚烷胺。细菌性感染时，根据病情适当选用抗生素。
-                                                        </section>
-                                                        <section class="znxy-results-result-item">
-                                                            3.此外还需采用一些对症处理措施，如有发热、头痛、全身痛时可用解热止痛药；喷嚏、流涕、鼻塞时可用曲吡那敏（扑尔敏）、感冒通、1%麻黄碱滴鼻等；咳嗽时可用止咳药；咽痛时可用度米芬（杜灭芬）喉片、溶菌酶含片等。
-                                                        </section>
-                                                    </div>
-                                                    <div class="znxy-results-result-footer"><a
-                                                            class="znxy-results-result-link"
-                                                            href="https://entity.kangfuzi.com/#/disease/0d418a784ab448bdeb36b5ee45199ea7"
-                                                            target="_blank">查看疾病详情</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

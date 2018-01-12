@@ -1455,9 +1455,9 @@
     display: inline-block
 }
 
-.znxy-views .znxy-results-view-overall .znxy-results-result[data-expand="1"] .znxy-results-fold {
-    display: none
-}
+/*.znxy-views .znxy-results-view-overall .znxy-results-result[data-expand="1"] .znxy-results-fold {*/
+    /*display: none*/
+/*}*/
 
 .znxy-results-view-register {
     padding: 10px;
