@@ -21,30 +21,8 @@ QY.CONTROLLERS
                 "option": [{"label": "男", "value": "0"}, {"label": "女", "value": "1"}],
                 "isShow": false
 
-            }, {
-                "select": "radio",
-                "desc": "请选择年龄",
-                "option": [{"label": "0-6岁", "value": "0"}, {"label": "7-12", "value": "1"}, {
-                    "label": "16-35",
-                    "value": "2"
-                }, {"label": "其他", "value": "3"}],
-                "isShow": false
+            }
 
-            },
-                {
-                    "select": "text",
-                    "desc": "请问有什么不适症状？",
-                    "label": "请输入症状，例如发烧、咳嗽等",
-                    "content": "",
-                    "isShow": false
-
-                }, {
-                    "select": "result",
-                    "desc": "请问有什么不适症状？",
-                    "label": "请输入症状，例如发烧、咳嗽等",
-                    "content": "",
-                    "isShow": false
-                }
             ];
             $scope.json =
                  [{
@@ -200,7 +178,7 @@ QY.CONTROLLERS
                 $http.get('/User/index').success(function (data) {
                     if (data) {
                         var s = {
-                            "select": "result",
+                            "select": "text",
                             "desc": "请问有什么不适症状？",
                             "label": "请输入症状，例如发烧、咳嗽等",
                             "content": "",
@@ -236,7 +214,7 @@ QY.CONTROLLERS
                 $http.get('/User/index').success(function (data) {
                     if (data) {
                         var s = {
-                            "select": "text",
+                            "select": "result",
                             "desc": "请问有什么不适症状？",
                             "label": "请输入症状，例如发烧、咳嗽等",
                             "content": "",
