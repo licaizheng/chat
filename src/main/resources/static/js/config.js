@@ -19,19 +19,5 @@ angular.module("QY.config", [])
         "fail":0,
         "error":-1
     })
-// /**
-//  * by gaoxing
-//  * 正则表达式
-//  */
-//     .constant('REGEX',{
-//         'alphanumeric':'^[a-zA-z0-9]+$'
-//     })
-//     .constant("RSA", {
-//         "encryptionExponent": "10001",
-//         "modulus": "93b2b4a59fe63cdc1a65c6e006d2a710de3d8bcfe93cb601f1af2c49946b80dfa1e607195b0ee8969e24544153fc12b84acdfbba53949f0a0d6c6f665dce4c37"
-//     })
-//     .constant("MessageConstant", {
-//         //公共提示信息
-//
-//     })
+
 ;

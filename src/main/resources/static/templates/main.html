@@ -30,7 +30,7 @@
                                                         class="znxy-questions-options-label znxy-ui-formitem-radio"
                                                         ng-repeat="r in x.option" ng-init="innerIndex = $index">
                                                     <input type="radio" class="znxy-questions-option" name="select"
-                                                           ng-click="change(outerIndex,innerIndex)"
+                                                           ng-click="radio_upload(outerIndex,innerIndex)"
                                                            ng-disabled="x.isShow">
                                                     <i></i> <span> {{r.label}} </span> </label></div>
                                             </form>
@@ -95,7 +95,7 @@
                                                             <input type="checkbox" ng-checked="selectAll"
                                                                    ng-model="r.state"
                                                                    class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
-                                                                   ng-click="all(outerIndex,innerIndex)"
+                                                                   ng-click="checkbox_upload(outerIndex,innerIndex)"
                                                                    ng-disabled="x.isShow"
                                                                    ng-click="selectone(outerIndex)"
                                                             > <i></i> <span> {{r.label}}</span>
@@ -103,7 +103,7 @@
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
-                                                                ng-click="cc(outerIndex,innerIndex)"
+                                                                ng-click="last_upload(outerIndex,innerIndex)"
                                                                 ng-disabled="x.isShow">确认
                                                         </button>
                                                     </div>
@@ -140,7 +140,7 @@
                                             </div>
                                             <div class="znxy-results-result znxy-results-result-1-0" data-expand="1"
                                                  ng-repeat="r in x.value" ng-init="innerIndex = $index">
-                                                <div class="znxy-results-result-header" ng-click="show(outerIndex,innerIndex)">
+                                                <div class="znxy-results-result-header" ng-click="show_detail(outerIndex,innerIndex)">
                                                     <span class="znxy-results-result-department">
                                                        <a href="#" class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right" data-group="1" data-i="0" ng-hide="r.isShow"></a>
                                                        <a href="#" class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down" data-group="1" data-i="1"ng-show="r.isShow"></a>

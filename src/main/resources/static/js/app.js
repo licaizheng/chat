@@ -12,7 +12,7 @@ QY.FILTERS = angular.module('QY.filters', ['QY.services']);
 QY.CONTROLLERS = angular.module('QY.controllers', ['QY.services']);
 
 angular.module('QY', ['ngAnimate', 'ui.router', 'QY.controllers', 'QY.services', 'QY.filters', 'QY.directives', 'QY.common', 'QY.backend', 'QY.config','ui.bootstrap'])
-    .run(["$rootScope","$state","$location","CommonMethods","$http",function($rootScope,$state,$location,CommonMethods,$http){
+    .run(["$rootScope","$state",function($rootScope,$state){
 
         /**
          * 根据导航条返回上一层

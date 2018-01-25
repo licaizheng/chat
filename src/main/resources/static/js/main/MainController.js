@@ -1,13 +1,7 @@
 /**
  * Created by caizheng on 2018/1/4.
  */
-/**
- * @ngdoc controllers
- * @name QY.controllers:MainController
- * @description
- * Main Page 控制器
- * # Created by zhongkewen on 2015/6/9.
- */
+
 QY.CONTROLLERS
     .controller('MainController', ["$scope", "$state", "$log", "$http",
         function ($scope, $state, $log, $http) {
@@ -20,12 +14,9 @@ QY.CONTROLLERS
                 "desc": "请选择性别",
                 "option": [{"label": "男", "value": "0"}, {"label": "女", "value": "1"}],
                 "isShow": false
-
-            }
-
-            ];
+            }];
             $scope.json =
-                 [{
+                [{
                     "name": "内分泌科",
                     "value": [{
                         "sub_dept": [],
@@ -45,7 +36,7 @@ QY.CONTROLLERS
                         "nameid": "cf10bffa79e595ebb489325424aa1ce8",
                         "pathway": ["典型症状: <em>多饮</em>，多食，消瘦，<em>多尿</em>"],
                         "unconfirmed": ["待确认多食、消瘦等伴随症状", "确诊需要尿糖、尿液尿酸测定、冠脉血流分数测定等检查"],
-                        "isShow":false
+                        "isShow": false
                     }, {
                         "sub_dept": [],
                         "haschild": 0,
@@ -64,7 +55,7 @@ QY.CONTROLLERS
                         "nameid": "3ebfdf16642c4c4b2c5d0d03d55460c8",
                         "pathway": ["典型症状: 高尿酸，关节痛，血尿"],
                         "unconfirmed": ["待确认关节痛、血尿、高尿酸等伴随症状", "确诊需要尿液尿酸测定、影像学检查、双肾B超等检查"],
-                        "isShow":false
+                        "isShow": false
                     }]
                 }, {
                     "name": "呼吸内科",
@@ -101,44 +92,34 @@ QY.CONTROLLERS
                         "nameid": "0d418a784ab448bdeb36b5ee45199ea7",
                         "pathway": ["典型症状: <em>咳嗽</em>，<em>流涕</em>，鼻塞，发热"],
                         "unconfirmed": ["待确认发热、鼻塞等伴随症状", "确诊需要病毒和病毒抗体的测定、细菌培养、血常规检查等检查"],
-                        "isShow":false
+                        "isShow": false
                     }]
                 }];
 
-
             $scope.selectAll = false;
-            $scope.show=function (outerIndex, innerIndex) {
-
-                if ( $scope.json[outerIndex].value[innerIndex].isShow==true)
-                $scope.json[outerIndex].value[innerIndex].isShow=false;
+            $scope.show_detail = function (outerIndex, innerIndex) {
+                if ($scope.json[outerIndex].value[innerIndex].isShow == true)
+                    $scope.json[outerIndex].value[innerIndex].isShow = false;
                 else {
-                    for (var i=0;i<$scope.json.length;i++){
-                        for (var j=0;j<$scope.json[i].value.length;j++){
-                            $scope.json[i].value[j].isShow=false;
-
+                    for (var i = 0; i < $scope.json.length; i++) {
+                        for (var j = 0; j < $scope.json[i].value.length; j++) {
+                            $scope.json[i].value[j].isShow = false;
                         }
                     }
-                    $scope.json[outerIndex].value[innerIndex].isShow=true;
+                    $scope.json[outerIndex].value[innerIndex].isShow = true;
                 }
-
             };
-            $scope.all = function (outerIndex, innerIndex) {
+            /**
+             * checkbox点击按钮，当选择全没有是提交请求
+             * */
+            $scope.checkbox_upload = function (outerIndex, innerIndex) {
                 var l = $scope.data[outerIndex].option.length - 1;
                 if (innerIndex != l) {
                     $scope.data[outerIndex].option[l].state = false;
-                    // console.log($scope.data[outerIndex].option);
                 } else {
                     $scope.data[outerIndex].option[l].state = true;
-                    // console.log($scope.data[outerIndex].option);
-                    // console.log($scope.data[outerIndex]);
                     $scope.data[outerIndex].isShow = true;
-                    var d = [];
-                    for (var i = 0; i < $scope.data[outerIndex].option.length; i++) {
-                        // $scope.data[outerIndex].option[i].state=false;
-                        d.push($scope.data[outerIndex].option[i].label);
-
-                    }
-                    $scope.anwser[outerIndex] = d.toString();
+                    $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
                     $http.get('/User/index').success(function (data) {
                         if (data) {
                             var s = {
@@ -154,9 +135,7 @@ QY.CONTROLLERS
                              */
                             if (outerIndex < $scope.data.length)
                                 $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
-
                             $scope.data.push(s);
-
                         }
                         else {
 
@@ -172,7 +151,7 @@ QY.CONTROLLERS
             /**
              * radio的点击事件
              */
-            $scope.change = function (outerIndex, innerIndex) {
+            $scope.radio_upload = function (outerIndex, innerIndex) {
                 $scope.data[outerIndex].isShow = true;
                 $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
                 $http.get('/User/index').success(function (data) {
@@ -201,15 +180,17 @@ QY.CONTROLLERS
                 }).error(function () {
                 });
             };
-
-            $scope.cc = function (outerIndex, innerIndex) {
+                /**
+                 * 提交获得查询结果
+                 * */
+            $scope.last_upload = function (outerIndex, innerIndex) {
                 $scope.data[outerIndex].isShow = true;
                 var data = [];
                 for (var i = 0; i < $scope.data[outerIndex].option.length; i++) {
                     if ($scope.data[outerIndex].option[i].state == true)
                         data.push($scope.data[outerIndex].option[i].label);
                 }
-                console.log(data);
+
                 $scope.anwser[outerIndex] = data.toString();
                 $http.get('/User/index').success(function (data) {
                     if (data) {
