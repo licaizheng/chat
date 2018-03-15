@@ -15,6 +15,7 @@ QY.CONTROLLERS
                 "option": [{"label": "男", "value": "0"}, {"label": "女", "value": "1"}],
                 "isShow": false
             }];
+            $scope.selectItem="";
             $scope.json =
                 [{
                     "name": "内分泌科",
@@ -118,15 +119,19 @@ QY.CONTROLLERS
                     $scope.data[outerIndex].option[l].state = false;
                 } else {
                     $scope.data[outerIndex].option[l].state = true;
+                    for(var i=0;i<l;i++)
+                        $scope.data[outerIndex].option[i].state = false;
                     $scope.data[outerIndex].isShow = true;
                     $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
                     $http.get('/User/index').success(function (data) {
                         if (data) {
                             var s = {
-                                "select": "text",
+                                "select": "text_checkbox",
                                 "desc": "请问有什么不适症状？",
                                 "label": "请输入症状，例如发烧、咳嗽等",
-                                "content": "",
+                                "option": [{"label": "发热", "value": "0", "state": "false"},
+                                    {"label": "呕吐", "value": "1", "state": "false"},
+                                    {"note": "感到没有力气", "label": "乏力", "value": "2", "state": "false"}],
                                 "isShow": false
 
                             };
@@ -141,6 +146,17 @@ QY.CONTROLLERS
 
                         }
 
+                    }).error(function () {
+
+                    });
+                    $http({
+                        method:'post',
+                        url:'/User/save',
+                        headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                        params:{"name":"aaa","address":"啊啊"}
+
+                    }).success(function(req){
+                        console.log(req);
                     }).error(function () {
 
                     });
@@ -229,13 +245,13 @@ QY.CONTROLLERS
                 $http.get('/User/index').success(function (data) {
                     if (data) {
                         var s = {
-                            "select": "last",
-                            "desc": "请选择性别",
-                            "option": [{"label": "男", "value": "0", "state": "false"}, {
-                                "label": "女",
-                                "value": "1",
-                                "state": "false"
-                            }, {"label": "都没有", "value": "2", "state": "false"}],
+                            "select": "year",
+                            "desc": "请输入年龄:",
+                            "time": [{"label": "岁", "value": "0", "state": "false"},
+                                {"label": "月", "value": "1", "state": "false"},
+                                {"label": "天", "value": "2", "state": "false"}],
+                            "t_name":"",
+
                             "isShow": false
                         };
                         /**
@@ -251,6 +267,49 @@ QY.CONTROLLERS
 
                 });
             };
+            /***
+             *
+             * @param outerIndex
+             * @param label
+             */
+            $scope.time_conform=function (outerIndex, label) {
+                console.log($scope.data[outerIndex].t_name);
+                console.log(label);
+                $scope.data[outerIndex].isShow = true;
+                $scope.anwser[outerIndex] = $scope.data[outerIndex].t_name+label.label;
+                $http.get('/User/index').success(function (data) {
+                    if (data) {
+                        var s = {
+                            "select": "checkbox",
+                            "desc": "请输入年龄:",
+                            "option": [{"label": "岁", "value": "0", "state": "false"},
+                                {"label": "月", "value": "1", "state": "false"},
+                                {"label": "天", "value": "2", "state": "false"}],
+
+
+                            "isShow": false
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if (outerIndex < $scope.data.length)
+                            $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
+                        $scope.data.push(s);
+                    }
+                    else {
+                    }
+                }).error(function () {
+
+                });
+            };
+            /****
+             * time_option的改变事件
+             * @param label
+             */
+            $scope.changede=function (label) {
+                console.log(label);
+
+            }
             /**
              * 修改按钮对应的事件
              */

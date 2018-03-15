@@ -8,6 +8,7 @@
                 <div class="declare_content"><span class="declare_text">声明：在线体验-智能导诊不能代替线下执业医生的诊疗，以下结果只能作为建议。</span>
                 </div>
                 <div id="container">
+
                     <div ng-repeat="x in data" ng-init="outerIndex = $index">
                         <div ng-switch="x.select">
                             <div class="znxy-question-container" ng-switch-when="radio">
@@ -38,8 +39,47 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="znxy-question-container-c7ecad80b33bb5b4e23eda75ae83df051515140594"
-                                 ng-switch-when="text">
+                            <div class="znxy-question-container" ng-switch-when="year">
+                                <div class="znxy-views">
+                                    <div class="znxy-questions-view znxy-question-age">
+                                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                                src="https://app.img.kangfuzi.com/764d6aa6289266940b9049d78dec0d12.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                                        </div>
+                                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                                <div class="znxy-questions-opt-container">
+                                                    <a class="znxy-questions-button znxy-questions-modify"
+                                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a>
+                                                </div>
+
+                                            </div>
+                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                                <form class="znxy-questions-form" novalidate="">
+                                                    <div class="znxy-ui-clearfix">
+                                                        <div class="znxy-ui-aside-right">
+                                                            <div class="znxy-ui-select">
+                                                                <label for="selectAge" class="znxy-ui-label">
+                                                                <select id="selectAge" class="znxy-questions-select" ng-init="label=x.time[0]" ng-model="label"  ng-change="changede(label);" ng-options="m.label for m in x.time">
+                                                                </select> <i class="znxy-ui-triangle-down"></i> </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="znxy-ui-fluidunit">
+                                                            <input type="number" class="znxy-questions-input" ng-model="x.t_name" min="1" max="150">
+                                                        </div>
+                                                    </div>
+                                                    <div class="znxy-questions-buttons-container">
+                                                        <button class="znxy-questions-submit-button" ng-click="time_conform(outerIndex, label)" ng-disabled="x.isShow">确认
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-switch-when="text">
                                 <div class="znxy-views">
                                     <div class="znxy-questions-view">
                                         <div class="znxy-questions-photo znxy-ui-aside"><img
@@ -63,7 +103,7 @@
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
                                                                 ng-click="conform(outerIndex,innerIndex)"
-                                                                ng-disabled="!x.content">确认
+                                                                ng-disabled="x.isShow">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -72,10 +112,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="znxy-question-container-6475be1097a504b38f47aa3b366fda9d1515307495"
-                                 ng-switch-when="last">
+                            <div ng-switch-when="checkbox">
                                 <div class="znxy-views">
-                                    <div class="znxy-questions-view">
+                                    <div class="znxy-questions-view" ng-disabled="x.isShow">
                                         <div class="znxy-questions-photo znxy-ui-aside"><img
                                                 src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
                                         </div>
@@ -92,14 +131,58 @@
                                                     <div class="znxy-questions-options-container">
                                                         <label class="znxy-questions-options-label znxy-ui-formitem-checkbox"
                                                                ng-repeat="r in x.option" ng-init="innerIndex = $index">
-                                                            <input type="checkbox" ng-checked="selectAll"
+                                                            <input type="checkbox" class="znxy-questions-option "
+                                                                   ng-checked="selectAll"
                                                                    ng-model="r.state"
-                                                                   class="znxy-questions-option znxy-questions-6475be1097a504b38f47aa3b366fda9d1515307495-0"
                                                                    ng-click="checkbox_upload(outerIndex,innerIndex)"
                                                                    ng-disabled="x.isShow"
-                                                                   ng-click="selectone(outerIndex)"
-                                                            > <i></i> <span> {{r.label}}</span>
+
+                                                            ><i></i> <span> {{r.label}}</span>
                                                         </label>
+                                                    </div>
+                                                    <div class="znxy-questions-buttons-container">
+                                                        <button class="znxy-questions-submit-button"
+                                                                ng-click="last_upload(outerIndex,innerIndex)"
+                                                                ng-disabled="x.isShow">确认
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-switch-when="text_checkbox">
+                                <div class="znxy-views">
+                                    <div class="znxy-questions-view" ng-disabled="x.isShow">
+                                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                                src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                                        </div>
+                                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                                <div class="znxy-questions-opt-container">
+                                                    <a class="znxy-questions-button znxy-questions-modify"
+                                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
+                                            </div>
+                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                                <form class="znxy-questions-form">
+                                                    <div class="znxy-questions-options-container">
+                                                        <label class="znxy-questions-options-label znxy-ui-formitem-checkbox"
+                                                               ng-repeat="r in x.option" ng-init="innerIndex = $index">
+                                                            <input type="checkbox" class="znxy-questions-option "
+                                                                   ng-checked="selectAll"
+                                                                   ng-model="r.state"
+                                                                   ng-click="checkbox_upload(outerIndex,innerIndex)"
+                                                                   ng-disabled="x.isShow"
+
+                                                            ><i></i> <span> {{r.label}}<span ng-show="r.note!=null"
+                                                                                             class="znxy-questions-option-note">({{r.note}})</span>  </span>
+                                                        </label>
+                                                        <input type="text"
+                                                               class="znxy-questions-input"
+                                                               placeholder="如有其他症状请输入">
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
@@ -140,13 +223,18 @@
                                             </div>
                                             <div class="znxy-results-result znxy-results-result-1-0" data-expand="1"
                                                  ng-repeat="r in x.value" ng-init="innerIndex = $index">
-                                                <div class="znxy-results-result-header" ng-click="show_detail(outerIndex,innerIndex)">
+                                                <div class="znxy-results-result-header"
+                                                     ng-click="show_detail(outerIndex,innerIndex)">
                                                     <span class="znxy-results-result-department">
-                                                       <a href="#" class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right" data-group="1" data-i="0" ng-hide="r.isShow"></a>
-                                                       <a href="#" class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down" data-group="1" data-i="1"ng-show="r.isShow"></a>
+                                                       <a href="#"
+                                                          class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                          data-group="1" data-i="0" ng-hide="r.isShow"></a>
+                                                       <a href="#"
+                                                          class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                          data-group="1" data-i="1" ng-show="r.isShow"></a>
                                                     </span>
                                                     <h4 class="znxy-results-result-name">{{r.name}}</h4> <span
-                                                            class="znxy-results-result-rate">{{r.weight}}</span>
+                                                        class="znxy-results-result-rate">{{r.weight}}</span>
                                                     <section class="znxy-results-result-short-desc">{{r.short_desc}}
                                                     </section>
                                                 </div>
