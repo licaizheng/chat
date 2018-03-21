@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +28,10 @@ public class ChatApplication {
 	}
 	@RequestMapping(value = "/save",method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> saveUser(@RequestParam(value = "name", required = true) String name,
+	public Map<String, String> saveUser( @RequestParam(value = "name", required = true) String name,
 										@RequestParam(value = "address", required = true) String address) {
+//		HttpServletRequest request = (HttpServletRequest) servletRequest;
+//		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String s=name;
 		String t=address;
 		Map<String, String> model = new HashMap<String, String>();

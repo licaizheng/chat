@@ -12,20 +12,7 @@ QY.FILTERS = angular.module('QY.filters', ['QY.services']);
 QY.CONTROLLERS = angular.module('QY.controllers', ['QY.services']);
 
 angular.module('QY', ['ngAnimate', 'ui.router', 'QY.controllers', 'QY.services', 'QY.filters', 'QY.directives', 'QY.common', 'QY.backend', 'QY.config','ui.bootstrap'])
-    .run(["$rootScope","$state",function($rootScope,$state){
 
-        /**
-         * 根据导航条返回上一层
-         */
-        $rootScope.goBack = function(){
-            var menuTitle =  CommonMethods.menuTitle();
-            if(menuTitle.length>1){
-                $state.go(menuTitle[menuTitle.length -2].stateName,menuTitle[menuTitle.length -2].params);
-            }else{
-                $state.go("main");
-            }
-        };
-    }])
     .config(["$stateProvider","$urlRouterProvider","$httpProvider",function ($stateProvider, $urlRouterProvider,$httpProvider) {
 
 
@@ -37,7 +24,13 @@ angular.module('QY', ['ngAnimate', 'ui.router', 'QY.controllers', 'QY.services',
                 controller: 'MainController',
                 data:{"stateNameCn":"主页"}
             })
+
+            .state('home', {
+                url: '/home',
+                templateUrl: 'templates/home.html',
+                data:{"stateNameCn":"home"}
+            })
         ;
 
-        $urlRouterProvider.otherwise('/main');
+        $urlRouterProvider.otherwise('/home');
     }]);

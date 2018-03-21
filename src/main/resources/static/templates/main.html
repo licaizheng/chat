@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="znxy-question-container" ng-switch-when="year">
+                            <div class="znxy-question-container" ng-switch-when="time">
                                 <div class="znxy-views">
                                     <div class="znxy-questions-view znxy-question-age">
                                         <div class="znxy-questions-photo znxy-ui-aside"><img
@@ -55,18 +55,18 @@
                                                 </div>
 
                                             </div>
-                                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                            <div class="znxy-questions-bubble znxy-ui-fluidunit" ng-disabled="x.isShow"><h3>{{x.desc}}</h3>
                                                 <form class="znxy-questions-form" novalidate="">
                                                     <div class="znxy-ui-clearfix">
                                                         <div class="znxy-ui-aside-right">
                                                             <div class="znxy-ui-select">
                                                                 <label for="selectAge" class="znxy-ui-label">
-                                                                <select id="selectAge" class="znxy-questions-select" ng-init="label=x.time[0]" ng-model="label"  ng-change="changede(label);" ng-options="m.label for m in x.time">
+                                                                <select id="selectAge" class="znxy-questions-select" ng-init="label=x.time[0]" ng-model="label"  ng-change="changede(label);" ng-options="m.label for m in x.time"ng-disabled="x.isShow">
                                                                 </select> <i class="znxy-ui-triangle-down"></i> </label>
                                                             </div>
                                                         </div>
                                                         <div class="znxy-ui-fluidunit">
-                                                            <input type="number" class="znxy-questions-input" ng-model="x.t_name" min="1" max="150">
+                                                            <input type="number" class="znxy-questions-input" ng-disabled="x.isShow" ng-model="x.t_name" min="1" max="150">
                                                         </div>
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
@@ -102,7 +102,7 @@
                                                                   ng-disabled="x.isShow"></textarea></div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
-                                                                ng-click="conform(outerIndex,innerIndex)"
+                                                                ng-click="textarea_conform(outerIndex,innerIndex)"
                                                                 ng-disabled="x.isShow">确认
                                                         </button>
                                                     </div>
@@ -182,7 +182,8 @@
                                                         </label>
                                                         <input type="text"
                                                                class="znxy-questions-input"
-                                                               placeholder="如有其他症状请输入">
+                                                               placeholder="如有其他症状请输入"
+                                                        ng-disabled="x.isShow">
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"

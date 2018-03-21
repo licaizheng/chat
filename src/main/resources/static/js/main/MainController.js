@@ -16,6 +16,10 @@ QY.CONTROLLERS
                 "isShow": false
             }];
             $scope.selectItem="";
+            /***
+             * json是结果的数据结构
+             * @type {*[]}
+             */
             $scope.json =
                 [{
                     "name": "内分泌科",
@@ -98,6 +102,11 @@ QY.CONTROLLERS
                 }];
 
             $scope.selectAll = false;
+            /****
+             * 结果的详情展示,点击显示详情
+             * @param outerIndex
+             * @param innerIndex
+             */
             $scope.show_detail = function (outerIndex, innerIndex) {
                 if ($scope.json[outerIndex].value[innerIndex].isShow == true)
                     $scope.json[outerIndex].value[innerIndex].isShow = false;
@@ -149,21 +158,20 @@ QY.CONTROLLERS
                     }).error(function () {
 
                     });
+                    //post请求实例
                     $http({
                         method:'post',
-                        url:'/User/save',
-                        headers:{'Content-Type': 'application/x-www-form-urlencoded'},
-                        params:{"name":"aaa","address":"啊啊"}
+                        url:'http://192.168.1.109:8080/User/save',//地址
+                        params:{"name":"aaa","address":"啊啊"}//参数
 
-                    }).success(function(req){
+                    }).success(function(req){//成功的回调函数
                         console.log(req);
-                    }).error(function () {
-
+                    }).error(function () {//失败的回调函数
                     });
                 }
             };
             $scope.anwser = [];
-            $scope.text = {"content": ""};
+            //$scope.text = {"content": ""};
             /**
              * radio的点击事件
              */
@@ -178,7 +186,6 @@ QY.CONTROLLERS
                             "label": "请输入症状，例如发烧、咳嗽等",
                             "content": "",
                             "isShow": false
-
                         };
                         /**
                          * 修改提交之后将修改下边的元素全部删除，重新问卷
@@ -239,13 +246,13 @@ QY.CONTROLLERS
             /**
              * textarea的点击确认事件
              */
-            $scope.conform = function (outerIndex, innerIndex) {
+            $scope.textarea_conform = function (outerIndex, innerIndex) {
                 $scope.data[outerIndex].isShow = true;
                 $scope.anwser[outerIndex] = $scope.data[outerIndex].content;
                 $http.get('/User/index').success(function (data) {
                     if (data) {
                         var s = {
-                            "select": "year",
+                            "select": "time",
                             "desc": "请输入年龄:",
                             "time": [{"label": "岁", "value": "0", "state": "false"},
                                 {"label": "月", "value": "1", "state": "false"},
@@ -268,7 +275,7 @@ QY.CONTROLLERS
                 });
             };
             /***
-             *
+             *时间的确认按钮
              * @param outerIndex
              * @param label
              */
@@ -284,7 +291,7 @@ QY.CONTROLLERS
                             "desc": "请输入年龄:",
                             "option": [{"label": "岁", "value": "0", "state": "false"},
                                 {"label": "月", "value": "1", "state": "false"},
-                                {"label": "天", "value": "2", "state": "false"}],
+                                {"label": "都没有", "value": "2", "state": "false"}],
 
 
                             "isShow": false
@@ -306,10 +313,10 @@ QY.CONTROLLERS
              * time_option的改变事件
              * @param label
              */
-            $scope.changede=function (label) {
-                console.log(label);
-
-            }
+            // $scope.changede=function (label) {
+            //     console.log(label);
+            //
+            // };
             /**
              * 修改按钮对应的事件
              */
