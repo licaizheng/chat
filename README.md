@@ -17,9 +17,9 @@ var s = {"select": "time",// radio(单选),checkbox(多选),checkbox_text(多选
          "option": [{"label": "岁", "value": "0", "state": "false","note": "感到没有力气",},//这里有个note字段,是多选按钮的描述,可有可无,不加没有影响
                     {"label": "月", "value": "1", "state": "false"},//state是选择状态的表示,全部是false即可
                     {"label": "天", "value": "2", "state": "false"}],//多选
-                    "content":"",//前台需要的字段,不用赋值,为空即可
-                    "isShow": false,//前端的展示字段,直接设置为False即可
-                    "label": "请输入症状，例如发烧、咳嗽等",//text的文字描述
+         "content":"",//前台需要的字段,不用赋值,为空即可
+         "isShow": false,//前端的展示字段,直接设置为False即可
+         "label": "请输入症状，例如发烧、咳嗽等",//text的文字描述
                         };
                         /**
   //结果展示字段
