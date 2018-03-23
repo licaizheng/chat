@@ -1,5 +1,16 @@
 index.html是加载界面,负责导入所有的html和js文件
 app.js是负责html和js对应的控制文件
+post请求实例,写在了 checkbox的全不选的事件中了,
+ //post请求实例
+                    $http({
+                        method:'post',
+                        url:'http://192.168.1.109:8080/User/save',//地址
+                        params:{"name":"aaa","address":"啊啊"}//参数
+
+                    }).success(function(req){//成功的回调函数
+                        console.log(req);
+                    }).error(function () {//失败的回调函数
+                    });
 前后台通信的数据结构:
 var s = {"select": "time",// radio,checkbox,checkbox_text,time,text,result
          "desc": "请输入年龄:",//描述
