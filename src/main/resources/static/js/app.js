@@ -28,6 +28,7 @@ angular.module('QY', ['ngAnimate', 'ui.router', 'QY.controllers', 'QY.services',
             .state('home', {
                 url: '/home',
                 templateUrl: 'templates/home.html',
+
                 data:{"stateNameCn":"home"}
             })
         ;

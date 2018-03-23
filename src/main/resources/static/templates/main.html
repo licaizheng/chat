@@ -142,7 +142,7 @@
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
-                                                                ng-click="last_upload(outerIndex,innerIndex)"
+                                                                ng-click="checkboxConform_upload(outerIndex,innerIndex)"
                                                                 ng-disabled="x.isShow">确认
                                                         </button>
                                                     </div>
@@ -174,7 +174,6 @@
                                                             <input type="checkbox" class="znxy-questions-option "
                                                                    ng-checked="selectAll"
                                                                    ng-model="r.state"
-                                                                   ng-click="checkbox_upload(outerIndex,innerIndex)"
                                                                    ng-disabled="x.isShow"
 
                                                             ><i></i> <span> {{r.label}}<span ng-show="r.note!=null"
@@ -183,11 +182,12 @@
                                                         <input type="text"
                                                                class="znxy-questions-input"
                                                                placeholder="如有其他症状请输入"
+                                                               ng-model="x.content"
                                                         ng-disabled="x.isShow">
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
-                                                                ng-click="last_upload(outerIndex,innerIndex)"
+                                                                ng-click="TextCheckbox_conform(outerIndex,innerIndex)"
                                                                 ng-disabled="x.isShow">确认
                                                         </button>
                                                     </div>

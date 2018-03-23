@@ -16,6 +16,7 @@ QY.CONTROLLERS
                 "isShow": false
             }];
             $scope.selectItem="";
+            $scope.anwser = [];
             /***
              * json是结果的数据结构
              * @type {*[]}
@@ -120,7 +121,7 @@ QY.CONTROLLERS
                 }
             };
             /**
-             * checkbox点击按钮，当选择全没有是提交请求
+             * checkbox选择框点击事件，当选择全没有是提交请求
              * */
             $scope.checkbox_upload = function (outerIndex, innerIndex) {
                 var l = $scope.data[outerIndex].option.length - 1;
@@ -141,6 +142,7 @@ QY.CONTROLLERS
                                 "option": [{"label": "发热", "value": "0", "state": "false"},
                                     {"label": "呕吐", "value": "1", "state": "false"},
                                     {"note": "感到没有力气", "label": "乏力", "value": "2", "state": "false"}],
+                                "content":"",
                                 "isShow": false
 
                             };
@@ -170,43 +172,12 @@ QY.CONTROLLERS
                     });
                 }
             };
-            $scope.anwser = [];
-            //$scope.text = {"content": ""};
-            /**
-             * radio的点击事件
+            /***
+             * checkbox确认按钮点击事件
+             * @param outerIndex
+             * @param innerIndex
              */
-            $scope.radio_upload = function (outerIndex, innerIndex) {
-                $scope.data[outerIndex].isShow = true;
-                $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
-                $http.get('/User/index').success(function (data) {
-                    if (data) {
-                        var s = {
-                            "select": "text",
-                            "desc": "请问有什么不适症状？",
-                            "label": "请输入症状，例如发烧、咳嗽等",
-                            "content": "",
-                            "isShow": false
-                        };
-                        /**
-                         * 修改提交之后将修改下边的元素全部删除，重新问卷
-                         */
-                        if (outerIndex < $scope.data.length)
-                            $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
-
-                        $scope.data.push(s);
-
-                    }
-                    else {
-
-                    }
-
-                }).error(function () {
-                });
-            };
-                /**
-                 * 提交获得查询结果
-                 * */
-            $scope.last_upload = function (outerIndex, innerIndex) {
+            $scope.checkboxConform_upload = function (outerIndex, innerIndex) {
                 $scope.data[outerIndex].isShow = true;
                 var data = [];
                 for (var i = 0; i < $scope.data[outerIndex].option.length; i++) {
@@ -243,6 +214,82 @@ QY.CONTROLLERS
                 });
 
             };
+            //$scope.text = {"content": ""};
+            /**
+             * radio的点击事件
+             */
+            $scope.radio_upload = function (outerIndex, innerIndex) {
+                $scope.data[outerIndex].isShow = true;
+                $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
+                $http.get('/User/index').success(function (data) {
+                    if (data) {
+                        var s = {
+                            "select": "text",
+                            "desc": "请问有什么不适症状？",
+                            "label": "请输入症状，例如发烧、咳嗽等",
+                            "content": "",
+                            "isShow": false
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if (outerIndex < $scope.data.length)
+                            $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
+
+                        $scope.data.push(s);
+
+                    }
+                    else {
+
+                    }
+
+                }).error(function () {
+                });
+            };
+            /*****
+             * text_checkbox的点击事件
+             * @param outerIndex
+             * @param innerIndex
+             * @constructor
+             */
+            $scope.TextCheckbox_conform=function (outerIndex, innerIndex) {
+                $scope.data[outerIndex].isShow = true;
+                var data = [];
+                for (var i = 0; i < $scope.data[outerIndex].option.length; i++) {
+                    if ($scope.data[outerIndex].option[i].state == true)
+                        data.push($scope.data[outerIndex].option[i].label);
+                }
+                var temp= data.toString();
+                $scope.anwser[outerIndex]=temp+","+$scope.data[outerIndex].content;
+
+                $http.get('/User/index').success(function (data) {
+                    if (data) {
+                        var s = {
+                            "select": "result",
+                            "desc": "请问有什么不适症状？",
+                            "label": "请输入症状，例如发烧、咳嗽等",
+                            "content": "",
+                            "isShow": false
+
+                        };
+                        /**
+                         * 修改提交之后将修改下边的元素全部删除，重新问卷
+                         */
+                        if (outerIndex < $scope.data.length)
+                            $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
+
+                        $scope.data.push(s);
+
+                    }
+                    else {
+
+                    }
+
+                }).error(function () {
+
+                });
+            };
+
             /**
              * textarea的点击确认事件
              */
@@ -309,14 +356,7 @@ QY.CONTROLLERS
 
                 });
             };
-            /****
-             * time_option的改变事件
-             * @param label
-             */
-            // $scope.changede=function (label) {
-            //     console.log(label);
-            //
-            // };
+
             /**
              * 修改按钮对应的事件
              */
