@@ -331,10 +331,10 @@ QY.CONTROLLERS
              * @param label
              */
             $scope.time_conform=function (outerIndex, label) {
-                console.log($scope.data[outerIndex].t_name);
-                console.log(label);
+                // console.log($scope.data[outerIndex].content);
+                // console.log(label);
                 $scope.data[outerIndex].isShow = true;
-                $scope.anwser[outerIndex] = $scope.data[outerIndex].t_name+label.label;
+                $scope.anwser[outerIndex] = $scope.data[outerIndex].content+label.label;
                 $http.get('/User/index').success(function (data) {
                     if (data) {
                         var s = {

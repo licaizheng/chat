@@ -14,7 +14,7 @@ post请求实例,写在了 checkbox的全不选的事件中了,
 前后台通信的数据结构:
 var s = {"select": "time",// radio,checkbox,checkbox_text,time,text,result
          "desc": "请输入年龄:",//描述
-         "option": [{"label": "岁", "value": "0", "state": "false"},
+         "option": [{"label": "岁", "value": "0", "state": "false","note": "感到没有力气",},//这里有个note字段,是多选按钮的描述,可有可无,不加没有影响
                     {"label": "月", "value": "1", "state": "false"},
                     {"label": "天", "value": "2", "state": "false"}],//多选
                     "content":"",//前台需要的字段,不用赋值,为空即可
