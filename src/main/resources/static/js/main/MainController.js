@@ -301,10 +301,10 @@ QY.CONTROLLERS
                         var s = {
                             "select": "time",
                             "desc": "请输入年龄:",
-                            "time": [{"label": "岁", "value": "0", "state": "false"},
+                            "option": [{"label": "岁", "value": "0", "state": "false"},
                                 {"label": "月", "value": "1", "state": "false"},
                                 {"label": "天", "value": "2", "state": "false"}],
-                            "t_name":"",
+                            "content":"",
 
                             "isShow": false
                         };

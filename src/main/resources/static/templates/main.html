@@ -61,12 +61,12 @@
                                                         <div class="znxy-ui-aside-right">
                                                             <div class="znxy-ui-select">
                                                                 <label for="selectAge" class="znxy-ui-label">
-                                                                <select id="selectAge" class="znxy-questions-select" ng-init="label=x.time[0]" ng-model="label"  ng-change="changede(label);" ng-options="m.label for m in x.time"ng-disabled="x.isShow">
+                                                                <select id="selectAge" class="znxy-questions-select" ng-init="label=x.option[0]" ng-model="label"  ng-change="changede(label);" ng-options="m.label for m in x.option"ng-disabled="x.isShow">
                                                                 </select> <i class="znxy-ui-triangle-down"></i> </label>
                                                             </div>
                                                         </div>
                                                         <div class="znxy-ui-fluidunit">
-                                                            <input type="number" class="znxy-questions-input" ng-disabled="x.isShow" ng-model="x.t_name" min="1" max="150">
+                                                            <input type="number" class="znxy-questions-input" ng-disabled="x.isShow" ng-model="x.content" min="1" max="150">
                                                         </div>
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
