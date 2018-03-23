@@ -16,6 +16,10 @@ QY.CONTROLLERS
                 "isShow": false
             }];
             $scope.selectItem="";
+            /**
+             * 用户选择答案的数据结构
+             * @type {Array}
+             */
             $scope.anwser = [];
             /***
              * json是结果的数据结构
