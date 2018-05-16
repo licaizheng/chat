@@ -33,5 +33,5 @@ angular.module('QY', ['ngAnimate', 'ui.router', 'QY.controllers', 'QY.services',
             })
         ;
 
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/main');
     }]);

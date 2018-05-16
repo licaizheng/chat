@@ -3,8 +3,8 @@
  */
 
 QY.CONTROLLERS
-    .controller('MainController', ["$scope", "$state", "$log", "$http",
-        function ($scope, $state, $log, $http) {
+    .controller('MainController', ["$scope", "$state", "$log", "$http","$location","$anchorScroll",
+        function ($scope, $state, $log, $http,$location,$anchorScroll) {
             "use strict";
             /**
              * 初始化
@@ -113,6 +113,7 @@ QY.CONTROLLERS
              * @param innerIndex
              */
             $scope.show_detail = function (outerIndex, innerIndex) {
+
                 if ($scope.json[outerIndex].value[innerIndex].isShow == true)
                     $scope.json[outerIndex].value[innerIndex].isShow = false;
                 else {
@@ -123,11 +124,14 @@ QY.CONTROLLERS
                     }
                     $scope.json[outerIndex].value[innerIndex].isShow = true;
                 }
+                // $location.hash("footer");
+                // $anchorScroll();
             };
             /**
              * checkbox选择框点击事件，当选择全没有是提交请求
              * */
             $scope.checkbox_upload = function (outerIndex, innerIndex) {
+
                 var l = $scope.data[outerIndex].option.length - 1;
                 if (innerIndex != l) {
                     $scope.data[outerIndex].option[l].state = false;
@@ -137,7 +141,7 @@ QY.CONTROLLERS
                         $scope.data[outerIndex].option[i].state = false;
                     $scope.data[outerIndex].isShow = true;
                     $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
-                    $http.get('/User/index').success(function (data) {
+                    $http.get('http://localhost:8080/User/index').success(function (data) {
                         if (data) {
                             var s = {
                                 "select": "text_checkbox",
@@ -156,6 +160,8 @@ QY.CONTROLLERS
                             if (outerIndex < $scope.data.length)
                                 $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
                             $scope.data.push(s);
+                            $location.hash("footer");
+                            $anchorScroll();
                         }
                         else {
 
@@ -165,14 +171,42 @@ QY.CONTROLLERS
 
                     });
                     //post请求实例
-                    $http({
-                        method:'post',
-                        url:'http://192.168.1.109:8080/User/save',//地址
-                        params:{"name":"aaa","address":"啊啊"}//参数
+                    var friends = new Array();
+                    var o1 = {
+                        "family": "大宅门",
+                        "otherName": "lisi",
+                        "desc": "亲密无间的好朋友"
+                    };
 
-                    }).success(function(req){//成功的回调函数
+                    var o2 = {
+                        "family": "军大院",
+                        "otherName": "wangwu",
+                        "desc": "关系一般"
+                    };
+
+                    friends.push(o1);
+                    friends.push(o2);
+
+                    //要发送的参数
+                    var params = {
+                        "id": 1,
+                        "name": "zhangsan",
+                        "age": 10,
+                        "friends":friends
+                    };
+
+                    $http({
+                        type:'json',
+                        method: "post",
+                        url: 'http://localhost:8080/User/saveStudent',
+                        data: JSON.stringify(params),
+                        headers: {
+                            'Content-type': 'application/json'
+                        }
+                    }).success(function (req) {
                         console.log(req);
-                    }).error(function () {//失败的回调函数
+                    }).error(function (err) {
+                        console.log(err);
                     });
                 }
             };
@@ -182,6 +216,7 @@ QY.CONTROLLERS
              * @param innerIndex
              */
             $scope.checkboxConform_upload = function (outerIndex, innerIndex) {
+
                 $scope.data[outerIndex].isShow = true;
                 var data = [];
                 for (var i = 0; i < $scope.data[outerIndex].option.length; i++) {
@@ -190,7 +225,7 @@ QY.CONTROLLERS
                 }
 
                 $scope.anwser[outerIndex] = data.toString();
-                $http.get('/User/index').success(function (data) {
+                $http.get('http://localhost:8080/User/index').success(function (data) {
                     if (data) {
                         var s = {
                             "select": "result",
@@ -208,6 +243,8 @@ QY.CONTROLLERS
 
                         $scope.data.push(s);
 
+                        $location.hash("footer");
+                        $anchorScroll();
                     }
                     else {
 
@@ -223,15 +260,16 @@ QY.CONTROLLERS
              * radio的点击事件
              */
             $scope.radio_upload = function (outerIndex, innerIndex) {
+
                 $scope.data[outerIndex].isShow = true;
                 $scope.anwser[outerIndex] = $scope.data[outerIndex].option[innerIndex].label;
-                $http.get('/User/index').success(function (data) {
+                $http.get('http://localhost:8080/User/index').success(function (data) {
                     if (data) {
                         var s = {
                             "select": "text",
                             "desc": "请问有什么不适症状？",
                             "label": "请输入症状，例如发烧、咳嗽等",
-                            "content": "",
+                            "content": null,
                             "isShow": false
                         };
                         /**
@@ -241,7 +279,8 @@ QY.CONTROLLERS
                             $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
 
                         $scope.data.push(s);
-
+                        $location.hash("footer");
+                        $anchorScroll();
                     }
                     else {
 
@@ -257,6 +296,7 @@ QY.CONTROLLERS
              * @constructor
              */
             $scope.TextCheckbox_conform=function (outerIndex, innerIndex) {
+
                 $scope.data[outerIndex].isShow = true;
                 var data = [];
                 for (var i = 0; i < $scope.data[outerIndex].option.length; i++) {
@@ -266,13 +306,13 @@ QY.CONTROLLERS
                 var temp= data.toString();
                 $scope.anwser[outerIndex]=temp+","+$scope.data[outerIndex].content;
 
-                $http.get('/User/index').success(function (data) {
+                $http.get('http://localhost:8080/User/index').success(function (data) {
                     if (data) {
                         var s = {
                             "select": "result",
                             "desc": "请问有什么不适症状？",
                             "label": "请输入症状，例如发烧、咳嗽等",
-                            "content": "",
+                            "content": null,
                             "isShow": false
 
                         };
@@ -283,7 +323,16 @@ QY.CONTROLLERS
                             $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
 
                         $scope.data.push(s);
-
+                        // sleep(1000);
+                        // var context = document.getElementById('context');
+                        // var container = document.getElementById('container');
+                        // var footer =document.getElementById('footer');
+                        // var offset =  container.clientHeight - footer.clientHeight;
+                        // console.log(offset);
+                        // context.scrollTop = offset < 0 ? 0 : offset;
+                        // console.log(offset);
+                        $location.hash("footer");
+                        $anchorScroll();
                     }
                     else {
 
@@ -298,9 +347,10 @@ QY.CONTROLLERS
              * textarea的点击确认事件
              */
             $scope.textarea_conform = function (outerIndex, innerIndex) {
+
                 $scope.data[outerIndex].isShow = true;
                 $scope.anwser[outerIndex] = $scope.data[outerIndex].content;
-                $http.get('/User/index').success(function (data) {
+                $http.get('http://localhost:8080/User/index').success(function (data) {
                     if (data) {
                         var s = {
                             "select": "time",
@@ -308,7 +358,7 @@ QY.CONTROLLERS
                             "option": [{"label": "岁", "value": "0", "state": "false"},
                                 {"label": "月", "value": "1", "state": "false"},
                                 {"label": "天", "value": "2", "state": "false"}],
-                            "content":"",
+                            "content":null,
 
                             "isShow": false
                         };
@@ -318,6 +368,16 @@ QY.CONTROLLERS
                         if (outerIndex < $scope.data.length)
                             $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
                         $scope.data.push(s);
+                        // sleep(10000);
+                        // var context = document.getElementById('context');
+                        // var container = document.getElementById('container');
+                        // var footer =document.getElementById('footer');
+                        // var offset =  container.clientHeight - footer.clientHeight;
+                        // console.log(offset);
+                        // container.scrollTop = offset < 0 ? 0 : offset;
+                        // console.log(container.scrollTop);
+                        $location.hash("footer");
+                        $anchorScroll();
                     }
                     else {
                     }
@@ -331,11 +391,12 @@ QY.CONTROLLERS
              * @param label
              */
             $scope.time_conform=function (outerIndex, label) {
+
                 // console.log($scope.data[outerIndex].content);
                 // console.log(label);
                 $scope.data[outerIndex].isShow = true;
                 $scope.anwser[outerIndex] = $scope.data[outerIndex].content+label.label;
-                $http.get('/User/index').success(function (data) {
+                $http.get('http://localhost:8080/User/index').success(function (data) {
                     if (data) {
                         var s = {
                             "select": "checkbox",
@@ -353,6 +414,15 @@ QY.CONTROLLERS
                         if (outerIndex < $scope.data.length)
                             $scope.data.splice(outerIndex + 1, $scope.data.length - outerIndex + 1);
                         $scope.data.push(s);
+                        // sleep(10000);
+                        // var context = document.getElementById('context');
+                        // var container = document.getElementById('container');
+                        // var footer =document.getElementById('footer');
+                        // var offset =  container.clientHeight - footer.clientHeight;
+                        // console.log(offset);
+                        // container.scrollTop = offset < 0 ? 0 : offset;
+                        $location.hash("footer");
+                        $anchorScroll();
                     }
                     else {
                     }

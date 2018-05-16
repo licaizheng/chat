@@ -70,7 +70,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="znxy-questions-buttons-container">
-                                                        <button class="znxy-questions-submit-button" ng-click="time_conform(outerIndex, label)" ng-disabled="x.isShow">确认
+                                                        <button class="znxy-questions-submit-button" ng-click="time_conform(outerIndex, label)" ng-disabled="x.isShow||x.content==null">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -101,9 +101,13 @@
                                                                   ng-model="x.content"
                                                                   ng-disabled="x.isShow"></textarea></div>
                                                     <div class="znxy-questions-buttons-container">
+                                                        <!--<button class="znxy-questions-submit-button"-->
+                                                                <!--ng-click="textarea_conform(outerIndex,innerIndex)"-->
+                                                                <!--ng-disabled="true" ng-if="x.content==null">确认-->
+                                                        <!--</button>-->
                                                         <button class="znxy-questions-submit-button"
                                                                 ng-click="textarea_conform(outerIndex,innerIndex)"
-                                                                ng-disabled="x.isShow">确认
+                                                                ng-disabled="x.isShow||x.content==null" >确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -143,7 +147,7 @@
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
                                                                 ng-click="checkboxConform_upload(outerIndex,innerIndex)"
-                                                                ng-disabled="x.isShow">确认
+                                                                ng-disabled="x.isShow||x.content==null">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -188,7 +192,7 @@
                                                     <div class="znxy-questions-buttons-container">
                                                         <button class="znxy-questions-submit-button"
                                                                 ng-click="TextCheckbox_conform(outerIndex,innerIndex)"
-                                                                ng-disabled="x.isShow">确认
+                                                                ng-disabled="x.isShow||x.content==null">确认
                                                         </button>
                                                     </div>
                                                 </form>
@@ -270,7 +274,7 @@
                         </div>
                     </div>
                 </div>
-
+                <div id ="footer" class="context-footer"></div>
             </div>
         </div>
     </div>

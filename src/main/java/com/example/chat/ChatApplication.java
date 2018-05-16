@@ -26,18 +26,29 @@ public class ChatApplication {
 		model.put("content", "Hello World");
 		return model;
 	}
-	@RequestMapping(value = "/save",method = RequestMethod.POST)
+
+	/**
+	 * 保存朋友
+	 */
+	@RequestMapping("/saveStudent")
 	@ResponseBody
-	public Map<String, String> saveUser( @RequestParam(value = "name", required = true) String name,
-										@RequestParam(value = "address", required = true) String address) {
-//		HttpServletRequest request = (HttpServletRequest) servletRequest;
-//		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String s=name;
-		String t=address;
-		Map<String, String> model = new HashMap<String, String>();
-		model.put("id", s);
-		return model;
+	public void saveStudent(@RequestBody StudendAndFriend studendAndFriend){
+		int age=studendAndFriend.getAge();
+		System.out.println("接收参数friends--->> " + age);
+		System.out.println("接收参数friends--->> " + studendAndFriend);
 	}
+//	@RequestMapping(value = "/save",method = RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String, String> saveUser( @RequestParam(value = "name", required = true) String name,
+//										@RequestParam(value = "address", required = true) String address) {
+////		HttpServletRequest request = (HttpServletRequest) servletRequest;
+////		HttpServletResponse response = (HttpServletResponse) servletResponse;
+//		String s=name;
+//		String t=address;
+//		Map<String, String> model = new HashMap<String, String>();
+//		model.put("id", s);
+//		return model;
+//	}
 	public static void main(String[] args) {
 		SpringApplication.run(ChatApplication.class, args);
 	}
