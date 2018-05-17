@@ -21,10 +21,17 @@ angular.module('QY', ['ngAnimate', 'ui.router', 'QY.controllers', 'QY.services',
             .state('main', {
                 url: '/main',
                 templateUrl: 'templates/main.html',
-                controller: 'MainController',
-                data:{"stateNameCn":"主页"}
+                controller: 'MainController'
             })
-
+            .state('main.test',{
+                url:'/orange',
+                controller: 'MaintestController',
+                templateUrl:'templates/test.html'
+            })
+            .state('main.test1',{
+                url:'/apple',
+                templateUrl:'templates/test1.html'
+            })
             .state('home', {
                 url: '/home',
                 templateUrl: 'templates/home.html',

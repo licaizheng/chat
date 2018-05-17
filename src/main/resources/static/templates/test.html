@@ -1,0 +1,278 @@
+<div id="container">
+
+    <div ng-repeat="x in data" ng-init="outerIndex = $index">
+        <div ng-switch="x.select">
+            <div class="znxy-question-container" ng-switch-when="radio">
+                <div class="znxy-views">
+
+                    <div class="znxy-questions-photo znxy-ui-aside"><img
+                            src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                    </div>
+                    <div class="znxy-questions-main znxy-ui-fluidunit">
+                        <div class="znxy-questions-op znxy-ui-aside-right">
+                            <div class="znxy-questions-opt-container">
+                                <a class="znxy-questions-button znxy-questions-modify"
+                                   ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                <a class="znxy-questions-button znxy-questions-cancel"
+                                   ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
+                        </div>
+                        <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                            <form class="znxy-questions-form">
+                                <div class="znxy-questions-options-container"><label
+                                        class="znxy-questions-options-label znxy-ui-formitem-radio"
+                                        ng-repeat="r in x.option" ng-init="innerIndex = $index">
+                                    <input type="radio" class="znxy-questions-option" name="select"
+                                           ng-click="radio_upload(outerIndex,innerIndex)"
+                                           ng-disabled="x.isShow">
+                                    <i></i> <span> {{r.label}} </span> </label></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="znxy-question-container" ng-switch-when="time">
+                <div class="znxy-views">
+                    <div class="znxy-questions-view znxy-question-age">
+                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                src="https://app.img.kangfuzi.com/764d6aa6289266940b9049d78dec0d12.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                        </div>
+                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                <div class="znxy-questions-opt-container">
+                                    <a class="znxy-questions-button znxy-questions-modify"
+                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a>
+                                </div>
+
+                            </div>
+                            <div class="znxy-questions-bubble znxy-ui-fluidunit" ng-disabled="x.isShow">
+                                <h3>{{x.desc}}</h3>
+                                <form class="znxy-questions-form" novalidate="">
+                                    <div class="znxy-ui-clearfix">
+                                        <div class="znxy-ui-aside-right">
+                                            <div class="znxy-ui-select">
+                                                <label for="selectAge" class="znxy-ui-label">
+                                                    <select id="selectAge" class="znxy-questions-select"
+                                                            ng-init="label=x.option[0]" ng-model="label"
+                                                            ng-change="changede(label);"
+                                                            ng-options="m.label for m in x.option"
+                                                            ng-disabled="x.isShow">
+                                                    </select> <i class="znxy-ui-triangle-down"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="znxy-ui-fluidunit">
+                                            <input type="number" class="znxy-questions-input"
+                                                   ng-disabled="x.isShow" ng-model="x.content" min="1"
+                                                   max="150">
+                                        </div>
+                                    </div>
+                                    <div class="znxy-questions-buttons-container">
+                                        <button class="znxy-questions-submit-button"
+                                                ng-click="time_conform(outerIndex, label)"
+                                                ng-disabled="x.isShow||x.content==null">确认
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="text">
+                <div class="znxy-views">
+                    <div class="znxy-questions-view">
+                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                        </div>
+                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                <div class="znxy-questions-opt-container">
+                                    <a class="znxy-questions-button znxy-questions-modify"
+                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
+                            </div>
+                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                <form class="znxy-questions-form">
+                                    <div class="znxy-questions-options-container">
+                                                        <textarea class="znxy-questions-textarea"
+                                                                  placeholder="{{x.label}}"
+                                                                  ng-model="x.content"
+                                                                  ng-disabled="x.isShow"></textarea></div>
+                                    <div class="znxy-questions-buttons-container">
+                                        <!--<button class="znxy-questions-submit-button"-->
+                                        <!--ng-click="textarea_conform(outerIndex,innerIndex)"-->
+                                        <!--ng-disabled="true" ng-if="x.content==null">确认-->
+                                        <!--</button>-->
+                                        <button class="znxy-questions-submit-button"
+                                                ng-click="textarea_conform(outerIndex,innerIndex)"
+                                                ng-disabled="x.isShow||x.content==null">确认
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="checkbox">
+                <div class="znxy-views">
+                    <div class="znxy-questions-view" ng-disabled="x.isShow">
+                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                        </div>
+                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                <div class="znxy-questions-opt-container">
+                                    <a class="znxy-questions-button znxy-questions-modify"
+                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
+                            </div>
+                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                <form class="znxy-questions-form">
+                                    <div class="znxy-questions-options-container">
+                                        <label class="znxy-questions-options-label znxy-ui-formitem-checkbox"
+                                               ng-repeat="r in x.option" ng-init="innerIndex = $index">
+                                            <input type="checkbox" class="znxy-questions-option "
+                                                   ng-checked="selectAll"
+                                                   ng-model="r.state"
+                                                   ng-click="checkbox_upload(outerIndex,innerIndex)"
+                                                   ng-disabled="x.isShow"
+
+                                            ><i></i> <span> {{r.label}}</span>
+                                        </label>
+                                    </div>
+                                    <div class="znxy-questions-buttons-container">
+                                        <button class="znxy-questions-submit-button"
+                                                ng-click="checkboxConform_upload(outerIndex,innerIndex)"
+                                                ng-disabled="x.isShow||x.content==null">确认
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="text_checkbox">
+                <div class="znxy-views">
+                    <div class="znxy-questions-view" ng-disabled="x.isShow">
+                        <div class="znxy-questions-photo znxy-ui-aside"><img
+                                src="https://app.img.kangfuzi.com/317f5f87d689f6bda9762261d29719d7.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                        </div>
+                        <div class="znxy-questions-main znxy-ui-fluidunit">
+                            <div class="znxy-questions-op znxy-ui-aside-right">
+                                <div class="znxy-questions-opt-container">
+                                    <a class="znxy-questions-button znxy-questions-modify"
+                                       ng-click="modify(outerIndex)" ng-show="x.isShow">修改</a>
+                                    <a class="znxy-questions-button znxy-questions-cancel"
+                                       ng-click="cancel(outerIndex)" ng-hide="x.isShow">取消</a></div>
+                            </div>
+                            <div class="znxy-questions-bubble znxy-ui-fluidunit"><h3>{{x.desc}}</h3>
+                                <form class="znxy-questions-form">
+                                    <div class="znxy-questions-options-container">
+                                        <label class="znxy-questions-options-label znxy-ui-formitem-checkbox"
+                                               ng-repeat="r in x.option" ng-init="innerIndex = $index">
+                                            <input type="checkbox" class="znxy-questions-option "
+                                                   ng-checked="selectAll"
+                                                   ng-model="r.state"
+                                                   ng-disabled="x.isShow"
+
+                                            ><i></i> <span> {{r.label}}<span ng-show="r.note!=null"
+                                                                             class="znxy-questions-option-note">({{r.note}})</span>  </span>
+                                        </label>
+                                        <input type="text"
+                                               class="znxy-questions-input"
+                                               placeholder="如有其他症状请输入"
+                                               ng-model="x.content"
+                                               ng-disabled="x.isShow">
+                                    </div>
+                                    <div class="znxy-questions-buttons-container">
+                                        <button class="znxy-questions-submit-button"
+                                                ng-click="TextCheckbox_conform(outerIndex,innerIndex)"
+                                                ng-disabled="x.isShow||x.content==null">确认
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="znxy-answer-container" ng-show="x.isShow">
+                <div class="znxy-views">
+                    <div class="znxy-answers-view">
+                        <div class="znxy-answers-photo znxy-ui-aside-right"><img
+                                src="https://app.img.kangfuzi.com/b8b9f79a2f3f60198e67de4dd5b12a9b.png?x-oss-process=image/resize,m_fill,w_100,h_100,limit_0/auto-orient,0/quality,q_90">
+                        </div>
+                        <div class="znxy-answers-main znxy-ui-fluidunit">
+                            <div class="znxy-answers-content">
+                                <div class="znxy-answers-bubble"><p>{{anwser[outerIndex]}}</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="znxy-result-container-3" ng-switch-when="result">
+                <div class="znxy-views znxy-results-view znxy-results-view-overall">
+                    <div class="znxy-results-view znxy-results-view-overall">
+                        <div class="znxy-results-heading"><h3>为您推荐科室</h3>
+                            <p class="znxy-results-statement">您的描述与以下科室的疾病比较接近，建议您优先去以下科室挂号就诊。</p>
+                        </div>
+                        <div class="znxy-results-content" ng-repeat="x in json"
+                             ng-init="outerIndex = $index">
+                            <div class="znxy-results-department"><span
+                                    class="znxy-results-department-logo"></span> {{x.name}}
+                            </div>
+                            <div class="znxy-results-result znxy-results-result-1-0" data-expand="1"
+                                 ng-repeat="r in x.value" ng-init="innerIndex = $index">
+                                <div class="znxy-results-result-header"
+                                     ng-click="show_detail(outerIndex,innerIndex)">
+                                                    <span class="znxy-results-result-department">
+                                                       <a href="#"
+                                                          class="znxy-results-toggle znxy-results-fold znxy-ui-chevron-right"
+                                                          data-group="1" data-i="0" ng-hide="r.isShow"></a>
+                                                       <a href="#"
+                                                          class="znxy-results-toggle znxy-results-expand znxy-ui-chevron-down"
+                                                          data-group="1" data-i="1" ng-show="r.isShow"></a>
+                                                    </span>
+                                    <h4 class="znxy-results-result-name">{{r.name}}</h4> <span
+                                        class="znxy-results-result-rate">{{r.weight}}</span>
+                                    <section class="znxy-results-result-short-desc">{{r.short_desc}}
+                                    </section>
+                                </div>
+                                <div class="znxy-results-result-main" ng-show="r.isShow">
+                                    <div class="znxy-results-result-main-block"><h4>诊疗路径：</h4>
+                                        <section class="znxy-results-result-item">典型症状: <em>{{r.symptoms}}</em>
+                                        </section>
+                                    </div>
+                                    <div class="znxy-results-result-main-block"><h4>进一步确诊需要：</h4>
+                                        <section class="znxy-results-result-item"
+                                                 ng-repeat="data in r.unconfirmed">{{data}}
+                                        </section>
+                                    </div>
+                                    <div class="znxy-results-result-main-block"><h4>治疗建议：</h4>
+                                        <section class="znxy-results-result-item"
+                                                 ng-repeat="advice in r.advice">
+                                            {{advice}}
+                                        </section>
+                                    </div>
+                                    <div class="znxy-results-result-footer"><a
+                                            class="znxy-results-result-link"
+                                            href="https://entity.kangfuzi.com/#/disease/cf10bffa79e595ebb489325424aa1ce8"
+                                            target="_blank">查看疾病详情</a></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" class="context-footer"></div>

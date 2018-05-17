@@ -95,7 +95,36 @@
 .main .default-top {
     top: 44px !important;
 }
-
+.top-nav .top-nav-pre[data-v-1e3c965c] {
+    color: #fff;
+    background-color: #5d67a4;
+}
+.top-nav[data-v-1e3c965c] {
+    width: 310px;
+    height: 40px;
+    margin: 20px auto 0;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.top-nav span[data-v-1e3c965c] {
+    display: inline-block;
+    line-height: 40px;
+    width: 100px;
+    text-align: center;
+    color: #5d67a4;
+    font-size: 16px;
+    cursor: pointer;
+}
+.top-nav span[data-v-1e3c965c] {
+    display: inline-block;
+    line-height: 40px;
+    width: 100px;
+    text-align: center;
+    color: #5d67a4;
+    font-size: 16px;
+    cursor: pointer;
+}
 .main #context .declare_content {
     display: block;
     width: 100%;
